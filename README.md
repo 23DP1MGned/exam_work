@@ -7,11 +7,6 @@
 ## Apraksts
 Projektā tiek izmantotas klases un metodes, lai modelētu objektus.
 
-## Tehnoloģijas
-- Python 3
-- OOP (Klases, Mantojums)
-- Pytest (testiem)
-
 ## Projekta struktūras apraksts
 
 .gitignore - faili un mapes, kurus ignorē Git
