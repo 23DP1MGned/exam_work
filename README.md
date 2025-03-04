@@ -7,18 +7,23 @@
 ## Apraksts
 Projektā tiek izmantotas klases un metodes, lai modelētu objektus.
 
+## Tehnoloģijas
+- Python 3
+- OOP (Klases, Mantojums)
+- Pytest (testiem)
+
 ## Projekta struktūras apraksts
 
-.gitignore - faili un mapes, kurus ignorē Git
-README.md - projekta apraksts
-requirements.txt - projektu bibliotēkas
-main.py - galvenais izpildāmais fails, ieejas punkts
+- .gitignore - faili un mapes, kurus ignorē Git
+- README.md - projekta apraksts
+- requirements.txt - projektu bibliotēkas
+- main.py - galvenais izpildāmais fails, ieejas punkts
 
-app/ - programmas galvenā loģika
-init.py - pakotnes app inicializācija
-models.py - klašu definīcijas (OOP modeļi)
-services.py - programmas galvena loģika
-utils.py - palīgfunkcijas
+- app/ - programmas galvenā loģika
+- init.py - pakotnes app inicializācija
+- models.py - klašu definīcijas (OOP modeļi)
+- services.py - programmas galvena loģika
+- utils.py - palīgfunkcijas
 
-tests/ - testi
-test_app.py - programmas loģikas testēšana
+- tests/ - testi
+- test_app.py - programmas loģikas testēšana
