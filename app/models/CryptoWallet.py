@@ -1,49 +1,65 @@
 import json
-from datetime import datetime
+import os
 from app.utils import CryptoConvert
 
+SUPPORTED_CRYPTOS = ["BTC", "ETH", "SOL", "DOT", "TON", "DOGE", "LTC", "XRP", "ADA", "AVAX"]
 
 class CryptoWallet:
-    def __init__(self, user):
-        self.user = user
-        self.balance_eur = 0.0
-        self.balance_btc = 0.0
-        self.transactions = []
+    def __init__(self, filename):
+        self.filename = filename
+        self.balances = {"USDT": 0.0, **{crypto: 0.0 for crypto in SUPPORTED_CRYPTOS}}
+        self.load_wallet()
+    
+    def load_wallet(self):
+        if os.path.exists(self.filename):
+            with open(self.filename, "r") as file:
+                self.balances = json.load(file)
+    
+    def save_wallet(self):
+        with open(self.filename, "w") as file:
+            json.dump(self.balances, file, indent=4)
+    
+    def total_balance(self):
+        total_usd = self.balances["USDT"]
+        for crypto, amount in self.balances.items():
+            if crypto != "USDT" and amount > 0:
+                total_usd += amount * CryptoConvert.crypto_rate(crypto)
+        print(f"Overall balance: {total_usd:.2f} USD")
 
-    def top_up(self, amount_eur):
-        self.balance_eur += amount_eur
-        self.transactions.append({
-            "type": "top_up",
-            "amount_eur": amount_eur,
-            "date": str(datetime.now())
-        })
-        print(f"Balance replenished: {amount_eur} EUR")
-        self.show_balance()
-
-    def convert_to_btc(self, amount_eur):
-        if amount_eur > self.balance_eur:
-            print("Error: Not enough funds in EUR!")
+    
+    def top_up(self, amount):
+        self.balances["USDT"] += amount
+        self.save_wallet()
+        print(f"The balance is replenished by {amount:.2f} USDT")
+    
+    def usdt_to_crypto(self, crypto, amount):
+        if crypto not in SUPPORTED_CRYPTOS:
+            print("Error: Unsupported cryptocurrency!")
             return
-        rate = CryptoConvert.get_btc_exchange_rate("eur")
-        btc_received = amount_eur / rate
-        self.balance_eur -= amount_eur
-        self.balance_btc += btc_received
-        self.transactions.append({
-            "type": "conversion",
-            "amount_eur": amount_eur,
-            "amount_btc": btc_received,
-            "date": str(datetime.now())
-        })
-        print(f"Conversion complete: {amount_eur} EUR -> {btc_received:.8f} BTC")
-        self.show_balance()
+        if amount > self.balances["USDT"]:
+            print("Error: Insufficient funds!")
+            return
+        rate = CryptoConvert.crypto_rate(crypto)
+        crypto_amount = amount / rate
+        self.balances["USDT"] -= amount
+        self.balances[crypto] += crypto_amount
+        self.save_wallet()
+        print(f"Converted: {amount:.2f} USDT -> {crypto_amount:.8f} {crypto}")
 
-    def show_balance(self):
-        print(f"Current balance: {self.balance_eur:.2f} EUR | {self.balance_btc:.8f} BTC")
-
-    def save_to_file(self):
-        with open(f"{self.user}_wallet.json", "w") as f:
-            json.dump({
-                "balance_eur": self.balance_eur,
-                "balance_btc": self.balance_btc,
-                "transactions": self.transactions
-            }, f, indent=4)
+    
+    def crypto_to_usdt(self, crypto, amount):
+        if crypto not in SUPPORTED_CRYPTOS:
+            print("Error: Unsupported cryptocurrency!")
+            return
+        if amount > self.balances[crypto]:
+            print("Error: Insufficient funds!")
+            return
+        rate = CryptoConvert.crypto_rate(crypto)
+        if rate == 0:
+            print("Error: Failed to get exchange rate!")
+            return
+        usdt_amount = amount * rate
+        self.balances[crypto] -= amount
+        self.balances["USDT"] += usdt_amount
+        self.save_wallet()
+        print(f"Converted: {amount:.8f} {crypto} -> {usdt_amount:.2f} USDT")
