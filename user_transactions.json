@@ -1,0 +1,25 @@
+{
+    "transactions": [
+        {
+            "type": "top_up",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-10 12:17:59"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-10 12:18:04"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.0001,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-10 12:18:11"
+        }
+    ]
+}
