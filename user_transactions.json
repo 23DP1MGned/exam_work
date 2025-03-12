@@ -20,6 +20,195 @@
             "from": "BTC",
             "to": "USDT",
             "date": "2025-03-10 12:18:11"
+        },
+        {
+            "type": "top_up",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:02:34"
+        },
+        {
+            "type": "top_up",
+            "amount": 21.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:02:40"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:02:54"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00024,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:03:13"
+        },
+        {
+            "type": "top_up",
+            "amount": 30.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:03:55"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:04:03"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.000242,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:04:20"
+        },
+        {
+            "type": "top_up",
+            "amount": 40.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:07:05"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:07:20"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00024,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:09:58"
+        },
+        {
+            "type": "top_up",
+            "amount": 40.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:11:58"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:12:06"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00024,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:12:21"
+        },
+        {
+            "type": "top_up",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:13:10"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:13:23"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00012,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:13:52"
+        },
+        {
+            "type": "top_up",
+            "amount": 40.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:14:11"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:14:18"
+        },
+        {
+            "type": "top_up",
+            "amount": 40.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:14:36"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:14:45"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:15:31"
+        },
+        {
+            "type": "top_up",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:18:00"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:18:10"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00012,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:18:25"
+        },
+        {
+            "type": "top_up",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-12 10:18:34"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-12 10:18:44"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00024,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-12 10:19:00"
         }
     ]
 }

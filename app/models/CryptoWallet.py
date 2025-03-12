@@ -49,7 +49,7 @@ class CryptoWallet:
             if isinstance(amount, (int, float)) and amount > 0:
                 if crypto != "USDT":
                     total_usd += float(amount) * CryptoConvert.crypto_rate(crypto)
-        print(f"Overall balance: {total_usd:.2f} USD")
+        print(f"Overall balance: {float(total_usd):.2f} USDT")
 
 
     def top_up(self, amount):
