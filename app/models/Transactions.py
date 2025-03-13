@@ -40,8 +40,40 @@ class Transactions:
                     
                 if transactions:
                     print("Transactions History:")
+                    print(" ")
                     for txn in transactions:
                         print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
-            input("Press Enter to go back to the menu...")
+                        print(" ")
+                print("Press 1 to sort transactions or Enter to go to menu")
+                choice = input("Enter option: ")
+                if choice == "1":
+                    print("")
+                    Transactions.sort_transactions(transactions)
+                else:
+                    print(" ")
+           # input("Press Enter to go back to the menu...")
         except(FileNotFoundError, json.JSONDecodeError):
             print("No transactions found")
+
+    def sort_transactions(transactions):
+        print("Choose sorting option:")
+        print("1 - Date")
+        print("2 - Amount")
+        print("3 - Type")
+        print("4 - From-To Currency")
+        choice = input("Enter option (1-4): ")
+        
+        if choice == "1":
+            transactions.sort(key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d %H:%M:%S"), reverse=True)
+        elif choice == "2":
+            transactions.sort(key=lambda x: float(x["amount"]), reverse=True)
+        elif choice == "3":
+            transactions.sort(key=lambda x: x["type"].lower())
+        elif choice == "4":
+            transactions.sort(key=lambda x: (x["from"], x["to"]))
+        
+        print("Sorted Transactions History:")
+        for txn in transactions:
+            print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+            print(" ")
+        input("Press Enter to go back to the menu...")
