@@ -32,13 +32,16 @@ class Transactions:
             json.dump(data, file, indent=4)
 
     def view_transactions():
-        filename = "user_transactions.json"
-        with open(filename, "r") as file:
-            data = json.load(file)
-            transactions = data.get("transactions", [])
-                 
-            if transactions:
-                print("Transactions History:")
-                for txn in transactions:
-                    print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
-        input("Press Enter to go back to the menu...")
+        try:
+            filename = "user_transactions.json"
+            with open(filename, "r") as file:
+                data = json.load(file)
+                transactions = data.get("transactions", [])
+                    
+                if transactions:
+                    print("Transactions History:")
+                    for txn in transactions:
+                        print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+            input("Press Enter to go back to the menu...")
+        except(FileNotFoundError, json.JSONDecodeError):
+            print("No transactions found")

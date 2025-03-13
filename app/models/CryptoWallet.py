@@ -19,16 +19,16 @@ class CryptoWallet:
 
                     if "USDT" not in data:
                         data["USDT"] = 0.0
+                    self.balances["USDT"] = float(data.get("USDT", 0.0))
                     
                     for crypto in SUPPORTED_CRYPTOS:
-                        if crypto not in data:
-                            data[crypto] = 0.0
-                    
-                    self.balances = data
+                        self.balances[crypto] = float(data.get(crypto, 0.0))
+
             except (json.JSONDecodeError, ValueError):
                 self.reset_wallet()
         else:
             self.reset_wallet()
+
 
     def reset_wallet(self):
         self.balances = {"USDT": 0.0, **{crypto: 0.0 for crypto in SUPPORTED_CRYPTOS}}
@@ -36,12 +36,13 @@ class CryptoWallet:
 
     def save_wallet(self):
         balances_to_save = {
-            key: f"{value:.8f}" if isinstance(value, (int, float)) else value
+            key: "{:.8f}".format(float(value)) if isinstance(value, (int, float, str)) else value
             for key, value in self.balances.items()
         }
         
         with open(self.filename, "w") as file:
             json.dump(balances_to_save, file, indent=4)
+
     
     def total_balance(self):
         total_usd = self.balances.get("USDT", 0.0)
