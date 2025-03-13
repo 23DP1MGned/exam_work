@@ -1,4 +1,5 @@
 import requests
+import os
 
 class CryptoConvert:
     API_URLS = {
@@ -29,3 +30,7 @@ class CryptoConvert:
         except Exception as e:
             print(f"Error getting rate: {e}")
             return 0.0
+        
+def clear_console():
+    os.system("cls" if os.name == "nt" else "clear")
+

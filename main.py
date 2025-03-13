@@ -2,9 +2,7 @@ import os
 import time
 from app.models.CryptoWallet import CryptoWallet
 from app.models.Transactions import Transactions
-
-def clear_console():
-    os.system("cls" if os.name == "nt" else "clear")
+from app.utils import clear_console
 
 def main():
     wallet = CryptoWallet("user_wallet.json")
