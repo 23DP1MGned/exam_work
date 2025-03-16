@@ -83,6 +83,20 @@
             "from": "USDT",
             "to": "BTC",
             "date": "2025-03-16 12:46:46"
+        },
+        {
+            "type": "withdrawal",
+            "amount": 50.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-16 12:56:28"
+        },
+        {
+            "type": "withdraw",
+            "amount": 3.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-16 12:57:25"
         }
     ]
 }

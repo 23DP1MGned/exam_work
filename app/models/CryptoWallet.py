@@ -105,5 +105,6 @@ class CryptoWallet:
         
         self.balances[currency] -= amount
         self.save_wallet()
-        transaction = Transactions("withdrawal", amount, currency, None)
+        transaction = Transactions("withdraw", amount, currency, None)
+        Transactions.save_transactions(transaction)
         print(f"You have successfully withdrawn {amount:.8f} {currency}!")
