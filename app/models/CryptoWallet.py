@@ -94,3 +94,16 @@ class CryptoWallet:
         print(f"Converted: {amount} {crypto} -> {usdt_amount} USDT")
         
         Transactions.save_transactions(Transactions("convert_to_usdt", amount, crypto, "USDT"))
+
+    def withdraw(self, currency, amount):
+        if currency not in self.balances:
+            print("Error: Unsupported currency.")
+            return
+        if self.balances[currency] < amount:
+            print("Error: Not enough funds on balance.")
+            return
+        
+        self.balances[currency] -= amount
+        self.save_wallet()
+        transaction = Transactions("withdrawal", amount, currency, None)
+        print(f"You have successfully withdrawn {amount:.8f} {currency}!")

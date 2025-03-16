@@ -15,7 +15,8 @@ def main():
         print("2 - Convert USDT to Crypto")
         print("3 - Convert Crypto to USDT")
         print("4 - View transactions")
-        print("5 - Exit")
+        print("5-  Withdraw funds")
+        print("6 - Exit")
         
         choice = input("Enter action number: ")
         
@@ -38,6 +39,16 @@ def main():
             clear_console()
             Transactions.view_transactions()
         elif choice == "5":
+            clear_console()
+            print("Available balances:")
+            for currency, amount in wallet.balances.items():
+                if amount > 0:
+                    print(f"{currency}: {amount:.8f}")
+            currency = input("Enter the crypto to withdraw: ").upper()
+            amount = float(input("Enter the amount to withdraw: "))
+            wallet.withdraw(currency, amount)
+            time.sleep(2)
+        elif choice == "6":
             clear_console()
             print("Exit...")
             wallet.save_wallet()

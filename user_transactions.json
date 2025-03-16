@@ -69,6 +69,20 @@
             "from": "USDT",
             "to": "USDT",
             "date": "2025-03-13 18:02:12"
+        },
+        {
+            "type": "top_up",
+            "amount": 1.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-16 12:25:55"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-16 12:46:46"
         }
     ]
 }
