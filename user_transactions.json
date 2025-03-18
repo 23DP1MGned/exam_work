@@ -169,6 +169,62 @@
             "to": "USDT",
             "date": "2025-03-18 19:53:06",
             "id": "ba2ecfa6-2268-48bb-94f7-aa48d660df33"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 20:14:11",
+            "id": "6741b342-6dac-47f4-9c7e-e173902c5b39"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 20:17:27",
+            "id": "868f4167-3a53-423b-94a3-d8e3a185b658"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 20:17:55",
+            "id": "7230a0bf-4696-4eef-9845-16044057f6de"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 20:17:59",
+            "id": "6e940048-1d8c-4e4b-b89a-cac99fdbb13d"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-18 20:19:58",
+            "id": "06af00bd-e199-46af-8bd5-50bd6efa4f1f"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.0001,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-18 20:22:33",
+            "id": "e0bb53d4-5472-4ad8-bcec-6b0a604113d3"
+        },
+        {
+            "type": "withdraw",
+            "amount": 90.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-18 20:26:11",
+            "id": "e218cea0-7ab5-4415-9be0-49dd56100da5"
         }
     ]
 }
