@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 import os
 from app.utils import clear_console
+import uuid
 
 class Transactions:
     def __init__(self, transactions_type, amount, from_crypto, to_crypto):
@@ -10,6 +11,7 @@ class Transactions:
         self.from_crypto = from_crypto
         self.to_crypto = to_crypto
         self.date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.transaction_id = str(uuid.uuid4())
 
     def to_dict(self):
         return {
@@ -17,7 +19,8 @@ class Transactions:
             "amount": self.amount,
             "from": self.from_crypto,
             "to": self.to_crypto,
-            "date": self.date
+            "date": self.date,
+            "id": self.transaction_id
         }
 
 

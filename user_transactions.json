@@ -97,6 +97,14 @@
             "from": "USDT",
             "to": null,
             "date": "2025-03-16 12:57:25"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 19:13:51",
+            "id": "b739f34d-8ae1-4b35-be4b-d8c816bd0c94"
         }
     ]
 }

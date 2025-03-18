@@ -18,6 +18,7 @@ def main():
         print("5-  Withdraw funds")
         print("6-  View your crypto")
         print("7 - Exit")
+        print(" ")
         
         choice = input("Enter action number: ")
         
