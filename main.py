@@ -16,7 +16,8 @@ def main():
         print("3 - Convert Crypto to USDT")
         print("4 - View transactions")
         print("5-  Withdraw funds")
-        print("6 - Exit")
+        print("6-  View your crypto")
+        print("7 - Exit")
         
         choice = input("Enter action number: ")
         
@@ -50,13 +51,20 @@ def main():
             time.sleep(2)
         elif choice == "6":
             clear_console()
+            print("Available balances:")
+            for currency, amount in wallet.balances.items():
+                if amount > 0:
+                    print(f"{currency}: {amount:.8f}")
+            input("Press Enter to return to menu...")
+        elif choice == "7":
+            clear_console()
             print("Exit...")
             wallet.save_wallet()
             break
         else:
             print("Invalid input, please try again.")
         
-        time.sleep(2)
+        time.sleep(1)
 
 
 if __name__ == "__main__":
