@@ -105,6 +105,70 @@
             "to": "USDT",
             "date": "2025-03-18 19:13:51",
             "id": "b739f34d-8ae1-4b35-be4b-d8c816bd0c94"
+        },
+        {
+            "type": "top_up",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-18 19:16:22",
+            "id": "2d12dd15-c060-44c3-908c-95456254e3f8"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.001,
+            "from": "ETH",
+            "to": "USDT",
+            "date": "2025-03-18 19:22:40",
+            "id": "856ee164-0b1d-49b3-a474-083129c86b03"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.001,
+            "from": "ETH",
+            "to": "USDT",
+            "date": "2025-03-18 19:23:20",
+            "id": "91a1b5d1-0c40-4b1c-a53d-afb81cc40eb9"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 7e-08,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-18 19:25:47",
+            "id": "230d5145-9c17-4809-8208-40f6ed7e0094"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.00875022,
+            "from": "ETH",
+            "to": "USDT",
+            "date": "2025-03-18 19:36:11",
+            "id": "0798479e-2ee5-4049-a828-1018b7549231"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-18 19:47:53",
+            "id": "09bbd176-f250-424f-91e8-1e97e27b89a0"
+        },
+        {
+            "type": "convert_to_crypto",
+            "amount": 23.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-18 19:52:39",
+            "id": "12e6a369-c7a5-4ef4-be78-10e5ff15ea77"
+        },
+        {
+            "type": "convert_to_usdt",
+            "amount": 0.0004,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-18 19:53:06",
+            "id": "ba2ecfa6-2268-48bb-94f7-aa48d660df33"
         }
     ]
 }

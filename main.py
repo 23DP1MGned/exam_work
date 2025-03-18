@@ -28,15 +28,29 @@ def main():
             wallet.top_up(amount)
         elif choice == "2":
             clear_console()
-            print(f"Your balance: {wallet.balances['USDT']} USDT")
+            print(f"Your USDT balance: {wallet.balances.get("USDT", 0)} USDT")
+            print(" ")
             crypto = input("Enter Crypto (BTC, ETH, SOL, DOT, TON, DOGE, LTC, XRP, ADA, AVAX): ").upper()
             amount = float(input("Enter the amount in USDT to convert: "))
             wallet.usdt_to_crypto(crypto, amount)
         elif choice == "3":
             clear_console()
-            crypto = input("Enter Crypto to convert to USDT (BTC, ETH, SOL, DOT, TON, DOGE, LTC, XRP, ADA, AVAX): ").upper()
-            amount = float(input("Enter the amount to convert: "))
-            wallet.crypto_to_usdt(crypto, amount)
+            filtered_balances = {currency: amount for currency, amount in wallet.balances.items() if amount > 0 and currency.upper() != "USDT"}
+            if filtered_balances:
+                print("Your Crypto:")
+                print(" ")
+                for currency, amount in filtered_balances.items():
+                    print(f"{currency}: {amount:.8f}")
+            else:
+                print("You have no Сrypto on your balance.")
+            if filtered_balances:
+                print(" ")
+                crypto = input("Enter Crypto: ").upper()
+                amount = float(input("Enter the amount to convert: "))
+                wallet.crypto_to_usdt(crypto, amount)
+            else:
+                print(" ")
+                input("Press Enter to return to the main menu...")
         elif choice == "4":
             clear_console()
             Transactions.view_transactions()
@@ -52,11 +66,7 @@ def main():
             time.sleep(2)
         elif choice == "6":
             clear_console()
-            print("Available balances:")
-            for currency, amount in wallet.balances.items():
-                if amount > 0:
-                    print(f"{currency}: {amount:.8f}")
-            input("Press Enter to return to menu...")
+            wallet.view_all_crypto()
         elif choice == "7":
             clear_console()
             print("Exit...")

@@ -71,7 +71,7 @@ class CryptoWallet:
         self.balances["USDT"] -= amount
         self.balances[crypto] += crypto_amount
         self.save_wallet()
-        print(f"Converted: {amount} USDT -> {crypto_amount} {crypto}")
+        print(f"Converted: {amount:.8f} USDT -> {crypto_amount:.8f} {crypto}")
         Transactions.save_transactions(Transactions("convert_to_crypto", amount, "USDT", crypto))
 
     def crypto_to_usdt(self, crypto, amount):
@@ -91,7 +91,7 @@ class CryptoWallet:
         self.balances[crypto] -= amount
         self.balances["USDT"] += usdt_amount
         self.save_wallet()
-        print(f"Converted: {amount} {crypto} -> {usdt_amount} USDT")
+        print(f"Converted: {amount:.8f} {crypto} -> {usdt_amount:.8f} USDT")
         
         Transactions.save_transactions(Transactions("convert_to_usdt", amount, crypto, "USDT"))
 
@@ -108,3 +108,12 @@ class CryptoWallet:
         transaction = Transactions("withdraw", amount, currency, None)
         Transactions.save_transactions(transaction)
         print(f"You have successfully withdrawn {amount:.8f} {currency}!")
+    
+    def view_all_crypto(self):
+        print("Available balances:")
+        print("")
+        for currency, amount in self.balances.items():
+            if amount > 0:
+                print(f"{currency}: {amount:.8f}")
+        print(" ")
+        input("Press Enter to return to menu...")
