@@ -50,14 +50,14 @@ class CryptoWallet:
             if isinstance(amount, (int, float)) and amount > 0:
                 if crypto != "USDT":
                     total_usd += float(amount) * CryptoConvert.crypto_rate(crypto)
-        print(f"Total balance: {float(total_usd):.2f} USDT")
+        print(f" Your total balance: {float(total_usd):.2f} USDT")
 
 
     def top_up(self, amount):
         self.balances["USDT"] += amount
         self.save_wallet()
-        print(f"The balance is replenished by {amount} USDT")
-        Transactions.save_transactions(Transactions("top_up", amount, "USDT", "USDT"))
+        print(f"The balance is replenished by {amount:.2f} USDT")
+        Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT"))
 
     def usdt_to_crypto(self, crypto, amount):
         if crypto not in SUPPORTED_CRYPTOS:
@@ -72,7 +72,7 @@ class CryptoWallet:
         self.balances[crypto] += crypto_amount
         self.save_wallet()
         print(f"Converted: {amount:.8f} USDT -> {crypto_amount:.8f} {crypto}")
-        Transactions.save_transactions(Transactions("convert_to_crypto", amount, "USDT", crypto))
+        Transactions.save_transactions(Transactions("Converting to crypto", amount, "USDT", crypto))
 
     def crypto_to_usdt(self, crypto, amount):
         if crypto not in SUPPORTED_CRYPTOS:
@@ -93,7 +93,7 @@ class CryptoWallet:
         self.save_wallet()
         print(f"Converted: {amount:.8f} {crypto} -> {usdt_amount:.8f} USDT")
         
-        Transactions.save_transactions(Transactions("convert_to_usdt", amount, crypto, "USDT"))
+        Transactions.save_transactions(Transactions("Converting to USDT", amount, crypto, "USDT"))
 
     def withdraw(self, currency, amount):
         if currency not in self.balances:
@@ -105,7 +105,7 @@ class CryptoWallet:
         
         self.balances[currency] -= amount
         self.save_wallet()
-        transaction = Transactions("withdraw", amount, currency, None)
+        transaction = Transactions("Withdrawing", amount, currency, None)
         Transactions.save_transactions(transaction)
         print(f"You have successfully withdrawn {amount:.8f} {currency}!")
     
