@@ -149,18 +149,17 @@ class CryptoWallet:
     def withdraw(self):
 
         print("Available balances:")
-        print(" ")
+        print("")
         for crypto, amount in self.balances.items():
             if amount > 0:
                 print(f"{crypto}: {amount:.8f}")
-            print(" ")
-            crypto = input("Enter the crypto to withdraw or Enter to return: ").upper()
-            if crypto == "":
-                return
-            else:
-                amount = float(input("Enter the amount to withdraw: "))
-                self.withdraw(crypto, amount)
-                time.sleep(2)
+        print(" ")
+        crypto = input("Enter the crypto to withdraw or Enter to return: ").upper()
+        if crypto == "":
+            return
+        else:
+            amount = float(input("Enter the amount to withdraw: "))
+            time.sleep(2)
                 
         if crypto not in self.balances:
             print("Error: Unsupported crypto.")
@@ -182,7 +181,8 @@ class CryptoWallet:
         self.save_wallet()
         transaction = Transactions("Withdrawing", amount, crypto, None)
         Transactions.save_transactions(transaction)
-        print(f"Withdrawal completed! {amount:.8f} USDT sent to card {formatted_card}.")
+        print(f"Withdrawal completed! {amount:.8f} {crypto} sent to card {formatted_card}.")
+        time.sleep(2)
     
     def view_all_crypto(self):
         print("Available balances:")
