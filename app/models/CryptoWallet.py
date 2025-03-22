@@ -120,11 +120,20 @@ class CryptoWallet:
             print("Error: Not enough funds on balance.")
             return
         
+        card_number = input("Enter card number (16 digits): ")
+        if not (card_number.isdigit() and len(card_number) == 16):
+            print("Error: Invalid card data.")
+            return
+        formatted_card = ' '.join([card_number[i:i+4] for i in range(0, 16, 4)])
+
+        
+        print("Processing withdraw...")
+        time.sleep(random.uniform(2, 4))
         self.balances[currency] -= amount
         self.save_wallet()
         transaction = Transactions("Withdrawing", amount, currency, None)
         Transactions.save_transactions(transaction)
-        print(f"You have successfully withdrawn {amount:.8f} {currency}!")
+        print(f"Withdrawal completed! {amount:.8f} USDT sent to card {formatted_card}.")
     
     def view_all_crypto(self):
         print("Available balances:")
