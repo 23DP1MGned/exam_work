@@ -2,6 +2,8 @@ import json
 import os
 from app.utils import CryptoConvert
 from app.models.Transactions import Transactions
+import time
+import random
 
 SUPPORTED_CRYPTOS = ["BTC", "ETH", "SOL", "DOT", "TON", "DOGE", "LTC", "XRP", "ADA", "AVAX"]
 
@@ -54,10 +56,25 @@ class CryptoWallet:
 
 
     def top_up(self, amount):
+        if amount <= 0:
+            print("Error: amount must be greater than 0.")
+            return
+        
+        card_number = input("Enter card number (16 digits): ")
+        cvc = input("Enter CVC (3 digits):  ")
+        date = input("Enter expiration date (MM/YY): ")
+            
+        if not (card_number.isdigit() and len(card_number) == 16 and cvc.isdigit() and len(cvc) == 3):
+            print("Error: Invalid card data.")
+            return
+            
+        print("Processing payment...")
+        time.sleep(random.uniform(2, 4))
         self.balances["USDT"] += amount
         self.save_wallet()
         print(f"The balance is replenished by {amount:.2f} USDT")
         Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT"))
+        time.sleep(1)
 
     def usdt_to_crypto(self, crypto, amount):
         if crypto not in SUPPORTED_CRYPTOS:
