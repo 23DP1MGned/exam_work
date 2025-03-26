@@ -143,6 +143,30 @@
             "to": null,
             "date": "2025-03-26 16:04:23",
             "id": "91d5888c-d28f-4466-bc8d-6a84f6c9b2b9"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 18:38:32",
+            "id": "2504352b-53f4-45ea-a3f2-dbd3d726218c"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 20:15:06",
+            "id": "86296774-d91d-4b4c-8356-e00b8beb3cbd"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 50.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-26 20:15:23",
+            "id": "54b3df55-0c63-47dd-9fbb-081dd1f75785"
         }
     ]
 }

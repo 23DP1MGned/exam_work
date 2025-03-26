@@ -1,4 +1,3 @@
-import os
 import time
 from app.models.CryptoWallet import CryptoWallet
 from app.models.Transactions import Transactions
@@ -19,15 +18,16 @@ def main():
         print("|  2 - Create new wallet            |")
         print("|  3 - Delete wallet                |")
         print("|  4 - View all wallets             |")
-        print("|  5 - Wallet operations            |")
-        print("|  6 - Exit                         |")
+        print("|  5 - Transfer funds               |")
+        print("|  6 - Wallet operations            |")
+        print("|  7 - Exit                         |")
         print("___________________________________")
         print(" ")
         
         choice = input("Enter action number: ")
         
         if choice == "1":
-            multi_wallet.select_wallet()
+            active_wallet = multi_wallet.select_wallet()
             time.sleep(1)
         
         elif choice == "2":
@@ -41,11 +41,15 @@ def main():
         elif choice == "4":
             multi_wallet.view_wallets()
             time.sleep(1)
-        
+
         elif choice == "5":
+            multi_wallet.transfer_funds()
+            time.sleep(1)
+        
+        elif choice == "6":
             if not active_wallet:
                 print("No active wallet selected!")
-                time.sleep(2)
+                time.sleep(1)
                 continue
             while True:
                 clear_console()
@@ -89,7 +93,7 @@ def main():
                     print("Invalid input, please try again.")
                 time.sleep(1)
         
-        elif choice == "6":
+        elif choice == "7":
             clear_console()
             print("Exit...")
             if active_wallet:
