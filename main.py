@@ -27,44 +27,20 @@ def main():
         choice = input("Enter action number: ")
         
         if choice == "1":
-            wallets = multi_wallet.get_wallets()
-            if not wallets:
-                print("No available wallets!")
-            else:
-                for i, wallet in enumerate(wallets):
-                    print(f"{i + 1}. {wallet['name']} - {wallet['address']}")
-                try:
-                    idx = int(input("Select wallet number: ")) - 1
-                    active_wallet = multi_wallet.switch_wallet(wallets[idx]['address'])
-                    print(f"Selected wallet: {wallets[idx]['name']}")
-                except (IndexError, ValueError):
-                    print("Invalid selection!")
-            time.sleep(2)
+            multi_wallet.select_wallet()
+            time.sleep(1)
         
         elif choice == "2":
-            name = input("Enter new wallet name: ")
-            wallet_address = multi_wallet.create_wallet(name)
-            print(f"Wallet {name} created with address {wallet_address}")
-            time.sleep(2)
+            multi_wallet.create_wallet()
+            time.sleep(1)
         
         elif choice == "3":
-            wallet_address = input("Enter wallet address to delete: ")
-            if multi_wallet.delete_wallet(wallet_address):
-                print("Wallet deleted!")
-                if active_wallet and active_wallet.wallet_address == wallet_address:
-                    active_wallet = None
-            else:
-                print("Wallet not found!")
-            time.sleep(2)
+            multi_wallet.delete_wallet(active_wallet)   
+            time.sleep(1)
         
         elif choice == "4":
-            wallets = multi_wallet.get_wallets()
-            if not wallets:
-                print("No available wallets!")
-            else:
-                for wallet in wallets:
-                    print(f"{wallet['name']} - {wallet['address']}")
-            input("Press Enter to continue...")
+            multi_wallet.view_wallets()
+            time.sleep(1)
         
         elif choice == "5":
             if not active_wallet:

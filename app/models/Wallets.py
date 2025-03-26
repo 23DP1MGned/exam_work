@@ -10,21 +10,40 @@ class Wallets:
         if not os.path.exists(self.WALLET_DIR):
             os.makedirs(self.WALLET_DIR)
     
-    def create_wallet(self, name):
+    def create_wallet(self):
+        name = input("Enter new wallet name: ")
         wallet_address = str(uuid.uuid4())
         wallet_path = os.path.join(self.WALLET_DIR, f"{name}.json")
         wallet = CryptoWallet(wallet_path, address=wallet_address)
         wallet.name = name
         wallet.save_wallet()
         
-        return wallet_address
+        print(f"Wallet {name} created with address {wallet_address}")
+        return wallet
     
-    def delete_wallet(self, wallet_address):
+    def delete_wallet(self, active_wallet):
+        wallets = self.get_wallets()
+        if not wallets:
+            print("No available wallets!")
+            return
+        else:
+            for wallet in wallets:
+                print(f"{wallet['name']} - {wallet['address']}")
+        wallet_address = input("Enter wallet name to delete: ")
         wallet_path = os.path.join(self.WALLET_DIR, f"{wallet_address}.json")
+
         if os.path.exists(wallet_path):
             os.remove(wallet_path)
-            return True
-        return False
+            print("Wallet deleted!")
+
+            if active_wallet and active_wallet.wallet_address == wallet_address:
+                active_wallet = None
+            return active_wallet
+
+        else:
+            print("Wallet not found!")
+            return active_wallet
+
     
     def get_wallets(self):
         wallets = []
@@ -47,3 +66,31 @@ class Wallets:
                         return CryptoWallet(wallet_path, address=wallet_address)
         return None
     
+    def select_wallet(self):
+        wallets = self.get_wallets()
+        if not wallets:
+            print("No available wallets!")
+            return None
+
+        for i, wallet in enumerate(wallets):
+            print(f"{i + 1}. {wallet['name']} - {wallet['address']}")
+
+        try:
+            idx = int(input("Select wallet number: ")) - 1
+            active_wallet = self.switch_wallet(wallets[idx]['address'])
+            print(f"Selected wallet: {wallets[idx]['name']}")
+            return active_wallet
+        except (IndexError, ValueError):
+            print("Invalid selection!")
+            return None
+
+
+    def view_wallets(self):
+        wallets = self.get_wallets()
+        if not wallets:
+            print("No available wallets!")
+        else:
+            for wallet in wallets:
+                print(f"{wallet['name']} - {wallet['address']}")
+        input("Press Enter to continue...")
+
