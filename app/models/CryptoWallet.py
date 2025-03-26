@@ -8,8 +8,9 @@ import random
 SUPPORTED_CRYPTOS = ["BTC", "ETH", "SOL", "DOT", "TON", "DOGE", "LTC", "XRP", "ADA", "AVAX"]
 
 class CryptoWallet:
-    def __init__(self, filename):
+    def __init__(self, filename, address=None):
         self.filename = filename
+        self.address = address
         self.balances = {"USDT": 0.0, **{crypto: 0.0 for crypto in SUPPORTED_CRYPTOS}}
         self.load_wallet()
     
@@ -21,6 +22,7 @@ class CryptoWallet:
 
                     if "USDT" not in data:
                         data["USDT"] = 0.0
+                    self.address = data.get("address", self.address)
                     self.balances["USDT"] = float(data.get("USDT", 0.0))
                     
                     for crypto in SUPPORTED_CRYPTOS:
@@ -38,8 +40,11 @@ class CryptoWallet:
 
     def save_wallet(self):
         balances_to_save = {
-            key: "{:.8f}".format(float(value)) if isinstance(value, (int, float, str)) else value
-            for key, value in self.balances.items()
+            "address": self.address,
+            **{
+                key: "{:.8f}".format(float(value)) if isinstance(value, (int, float, str)) else value
+                for key, value in self.balances.items()
+            }
         }
         
         with open(self.filename, "w") as file:
@@ -68,6 +73,7 @@ class CryptoWallet:
         card_number = input("Enter card number (16 digits): ")
         cvc = input("Enter CVC (3 digits):  ")
         date = input("Enter expiration date (MM/YY): ")
+        formatted_card = ' '.join([card_number[i:i+4] for i in range(0, 16, 4)])
             
         if not (card_number.isdigit() and len(card_number) == 16 and cvc.isdigit() and len(cvc) == 3):
             print("Error: Invalid card data.")
@@ -77,9 +83,9 @@ class CryptoWallet:
         time.sleep(random.uniform(2, 4))
         self.balances["USDT"] += amount
         self.save_wallet()
-        print(f"The balance is replenished by {amount:.2f} USDT")
+        print(f"The balance is replenished by {amount:.2f} USDT from card {formatted_card}")
         Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT"))
-        time.sleep(0.5)
+        time.sleep(1)
 
     def usdt_to_crypto(self):
         

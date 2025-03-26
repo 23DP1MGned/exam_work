@@ -1,0 +1,148 @@
+{
+    "transactions": [
+        {
+            "type": "Balance replenishment",
+            "amount": 32.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-25 19:54:38",
+            "id": "d0dfa5e3-7c7b-4cb5-baee-9bc8b6a65d11"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 21332.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-25 19:56:13",
+            "id": "5514faa5-59a7-42a0-8698-dbe1bb97021e"
+        },
+        {
+            "type": "Withdrawing",
+            "amount": 21332.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-25 19:57:05",
+            "id": "dee8a92f-58db-4355-80af-819d942c597c"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-25 19:57:25",
+            "id": "5ceb9b02-036c-4084-b2e1-06c3d0606c4e"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 11:15:51",
+            "id": "42b9d97e-27df-488e-be3d-82b5a2b0d5d5"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 11:18:33",
+            "id": "6279dcfd-a9ec-45a2-968a-127703ccb455"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 100.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-26 11:18:56",
+            "id": "5dc46eeb-7668-4c91-983b-f51f2b3d944e"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "SOL",
+            "date": "2025-03-26 11:19:15",
+            "id": "73d53ffb-785a-4841-9c32-2d0cc2e38014"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 50.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 11:20:46",
+            "id": "e3db2976-ae7c-49e3-9415-c3c082afa998"
+        },
+        {
+            "type": "Converting to USDT",
+            "amount": 1.0,
+            "from": "SOL",
+            "to": "USDT",
+            "date": "2025-03-26 11:21:32",
+            "id": "20aaa190-050d-41c8-bc6e-950c19561ea5"
+        },
+        {
+            "type": "Withdrawing",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-26 11:22:13",
+            "id": "6dca093a-30cb-4605-a325-506fd22e644c"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 22.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 11:22:35",
+            "id": "9f593e2b-61bc-4f5c-aeaa-54f9f91e9570"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 12.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 11:23:09",
+            "id": "c91d1747-d0d3-4389-ad5e-b8e05b385bdb"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 20.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 14:56:51",
+            "id": "2050fd76-23ce-4c6a-b173-983030b8dd61"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 123.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-03-26 16:03:38",
+            "id": "53b4f007-9934-4199-a769-7129a5275e5b"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 21.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-03-26 16:03:53",
+            "id": "57cbae1c-c5d2-4b6a-8326-aac66c9f1768"
+        },
+        {
+            "type": "Converting to USDT",
+            "amount": 0.0002,
+            "from": "BTC",
+            "to": "USDT",
+            "date": "2025-03-26 16:04:03",
+            "id": "246def32-96a7-447d-b877-a9bf1bfd274f"
+        },
+        {
+            "type": "Withdrawing",
+            "amount": 100.0,
+            "from": "USDT",
+            "to": null,
+            "date": "2025-03-26 16:04:23",
+            "id": "91d5888c-d28f-4466-bc8d-6a84f6c9b2b9"
+        }
+    ]
+}
