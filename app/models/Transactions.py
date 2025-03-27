@@ -6,11 +6,12 @@ import uuid
 from time import sleep
 
 class Transactions:
-    def __init__(self, transactions_type, amount, from_crypto, to_crypto):
+    def __init__(self, transactions_type, amount, from_crypto, to_crypto, wallet_address):
         self.transactions_type = transactions_type 
         self.amount = amount
         self.from_crypto = from_crypto
         self.to_crypto = to_crypto
+        self.wallet_address = wallet_address
         self.date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.transaction_id = str(uuid.uuid4())
 
@@ -21,6 +22,7 @@ class Transactions:
             "from": self.from_crypto,
             "to": self.to_crypto,
             "date": self.date,
+            "wallet_address": self.wallet_address,
             "id": self.transaction_id
         }
 
@@ -47,7 +49,7 @@ class Transactions:
                     print("Transactions History:")
                     print(" ")
                     for txn in transactions:
-                        print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                        print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                         print(" ")
                 print("Press 1 to sort transactions or Enter to go to menu")
                 choice = input("Enter option: ")
@@ -80,7 +82,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -93,7 +95,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -108,7 +110,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -126,7 +128,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                 input("Press Enter to go back to the menu...")
                 break
 

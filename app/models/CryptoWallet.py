@@ -84,7 +84,7 @@ class CryptoWallet:
         self.balances["USDT"] += amount
         self.save_wallet()
         print(f"The balance is replenished by {amount:.2f} USDT from card {formatted_card}")
-        Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT"))
+        Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT", self.address))
         time.sleep(1)
 
     def usdt_to_crypto(self):
@@ -109,7 +109,7 @@ class CryptoWallet:
         self.balances[crypto] += crypto_amount
         self.save_wallet()
         print(f"Converted: {amount:.8f} USDT -> {crypto_amount:.8f} {crypto}")
-        Transactions.save_transactions(Transactions("Converting to crypto", amount, "USDT", crypto))
+        Transactions.save_transactions(Transactions("Converting to crypto", amount, "USDT", crypto, self.address))
 
     def crypto_to_usdt(self):
 
@@ -150,7 +150,7 @@ class CryptoWallet:
         self.save_wallet()
         print(f"Converted: {amount:.8f} {crypto} -> {usdt_amount:.8f} USDT")
         
-        Transactions.save_transactions(Transactions("Converting to USDT", amount, crypto, "USDT"))
+        Transactions.save_transactions(Transactions("Converting to USDT", amount, crypto, "USDT", self.address))
 
     def withdraw(self):
 
@@ -185,7 +185,7 @@ class CryptoWallet:
         time.sleep(random.uniform(2, 4))
         self.balances[crypto] -= amount
         self.save_wallet()
-        transaction = Transactions("Withdrawing", amount, crypto, None)
+        transaction = Transactions("Withdrawing", amount, crypto, None, self.address )
         Transactions.save_transactions(transaction)
         print(f"Withdrawal completed! {amount:.8f} {crypto} sent to card {formatted_card}.")
         time.sleep(2)
