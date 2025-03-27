@@ -19,8 +19,9 @@ def main():
         print("|  3 - Delete wallet                |")
         print("|  4 - View all wallets             |")
         print("|  5 - Transfer funds               |")
-        print("|  6 - Wallet operations            |")
-        print("|  7 - Exit                         |")
+        print("|  6 - View transactions            |")
+        print("|  7 - Wallet operations            |")
+        print("|  8 - Exit                         |")
         print("___________________________________")
         print(" ")
         
@@ -45,8 +46,12 @@ def main():
         elif choice == "5":
             multi_wallet.transfer_funds()
             time.sleep(1)
-        
+
         elif choice == "6":
+            clear_console()
+            Transactions.view_transactions()
+
+        elif choice == "7":
             if not active_wallet:
                 print("No active wallet selected!")
                 time.sleep(1)
@@ -60,10 +65,9 @@ def main():
                 print("|  1 - Top up balance in USDT    |")
                 print("|  2 - Convert USDT to Crypto    |")
                 print("|  3 - Convert Crypto to USDT    |")
-                print("|  4 - View transactions         |")
-                print("|  5 - Withdraw funds            |")
-                print("|  6 - View your crypto          |")
-                print("|  7 - Back                      |")
+                print("|  4 - Withdraw funds            |")
+                print("|  5 - View your crypto          |")
+                print("|  6 - Back                      |")
                 print("___________________________________")
                 print(" ")
                 
@@ -80,20 +84,17 @@ def main():
                     active_wallet.crypto_to_usdt()
                 elif sub_choice == "4":
                     clear_console()
-                    Transactions.view_transactions()
+                    active_wallet.withdraw()
                 elif sub_choice == "5":
                     clear_console()
-                    active_wallet.withdraw()
-                elif sub_choice == "6":
-                    clear_console()
                     active_wallet.view_all_crypto()
-                elif sub_choice == "7":
+                elif sub_choice == "6":
                     break
                 else:
                     print("Invalid input, please try again.")
                 time.sleep(1)
         
-        elif choice == "7":
+        elif choice == "8":
             clear_console()
             print("Exit...")
             if active_wallet:

@@ -74,8 +74,8 @@ class Transactions:
             
             if choice == "1":
                 clear_console()
-                order = input("Sort by date (increase/decrease): ").strip().lower()
-                transactions.sort(key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d %H:%M:%S"), reverse=(order == "desc"))
+                order = input("Sort by date increase(1)/decrease(2): ").strip().lower()
+                transactions.sort(key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d %H:%M:%S"), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
                 print("")
@@ -87,8 +87,8 @@ class Transactions:
 
             elif choice == "2":
                 clear_console()
-                order = input("Sort by amount (increase/decrease): ").strip().lower()
-                transactions.sort(key=lambda x: float(x["amount"]), reverse=(order == "desc"))
+                order = input("Sort by amount increase(1)/decrease(2): ").strip().lower()
+                transactions.sort(key=lambda x: float(x["amount"]), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
                 print("")
@@ -120,8 +120,8 @@ class Transactions:
                 from_currency = input("Enter 'from' crypto: ").strip().upper()
                 to_currency = input("Enter 'to' crypto: ").strip().upper()
                 transactions = [txn for txn in transactions if txn["from"] == from_currency and txn["to"] == to_currency]
-                order = input("Sort by currency (increase/decrease): ").s0trip().lower()
-                transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "desc"))
+                order = input("Sort by currency increase(1)/decrease(2): ").s0trip().lower()
+                transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
                 print("")
