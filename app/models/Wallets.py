@@ -2,6 +2,7 @@ import os
 import json
 import uuid
 from app.models.CryptoWallet import CryptoWallet
+from app.utils import clear_console
 
 class Wallets:
     WALLET_DIR = "wallets"
@@ -11,17 +12,19 @@ class Wallets:
             os.makedirs(self.WALLET_DIR)
     
     def create_wallet(self):
+        clear_console()
         name = input("Enter new wallet name: ")
         address = str(uuid.uuid4())
         wallet_path = os.path.join(self.WALLET_DIR, f"{name}.json")
         wallet = CryptoWallet(wallet_path, address=address)
         wallet.name = name
         wallet.save_wallet()
-        
-        print(f"Wallet {name} created with address {address}")
+        print("")
+        print(f"Wallet {name} created with address: {address}")
         return wallet
     
     def delete_wallet(self, active_wallet):
+        clear_console()
         wallets = self.get_wallets()
         if not wallets:
             print("No available wallets!")
@@ -29,6 +32,7 @@ class Wallets:
         else:
             for wallet in wallets:
                 print(f"{wallet['name']} - {wallet['address']}")
+                print("")
         address = input("Enter wallet name to delete: ")
         wallet_path = os.path.join(self.WALLET_DIR, f"{address}.json")
 
@@ -67,17 +71,19 @@ class Wallets:
         return None
     
     def select_wallet(self):
+        clear_console()
         wallets = self.get_wallets()
         if not wallets:
             print("No available wallets!")
             return None
-
+        
         for i, wallet in enumerate(wallets):
             print(f"{i + 1}. {wallet['name']} - {wallet['address']}")
-
+            print("")
         try:
             idx = int(input("Select wallet number: ")) - 1
             active_wallet = self.switch_wallet(wallets[idx]['address'])
+            print("")
             print(f"Selected wallet: {wallets[idx]['name']}")
             return active_wallet
         except (IndexError, ValueError):
@@ -86,11 +92,13 @@ class Wallets:
 
 
     def view_wallets(self):
+        clear_console()
         wallets = self.get_wallets()
         if not wallets:
             print("No available wallets!")
         else:
             for wallet in wallets:
+                print("")
                 print(f"{wallet['name']} - {wallet['address']}")
         input("Press Enter to continue...")
 

@@ -51,8 +51,7 @@ class Transactions:
                     for txn in transactions:
                         print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
                         print(" ")
-                print("Press 1 to sort transactions or Enter to go to menu")
-                choice = input("Enter option: ")
+                choice=input(("Press 1 to sort transactions or Enter to go to menu: "))
                 if choice == "1":
                     clear_console()
                     print("")

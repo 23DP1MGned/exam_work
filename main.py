@@ -13,6 +13,8 @@ def main():
         clear_console()
         if active_wallet:
             print(f"Selected Wallet: {os.path.splitext(os.path.basename(active_wallet.filename))[0]}")
+        else:
+            print("No Wallet selected!")
         print(" ")
         print("___________________________________")
         print("|         Select an action:         |")
