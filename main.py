@@ -1,4 +1,5 @@
 import time
+import os
 from app.models.CryptoWallet import CryptoWallet
 from app.models.Transactions import Transactions
 from app.models.Wallets import Wallets
@@ -10,6 +11,8 @@ def main():
     
     while True:
         clear_console()
+        if active_wallet:
+            print(f"Selected Wallet: {os.path.splitext(os.path.basename(active_wallet.filename))[0]}")
         print(" ")
         print("___________________________________")
         print("|         Select an action:         |")
