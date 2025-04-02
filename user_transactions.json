@@ -35,6 +35,33 @@
             "date": "2025-03-27 21:02:05",
             "wallet_address": "779242b4-160e-4515-9e45-436648ba23f6",
             "id": "1f965dea-3180-48b3-aa7b-09277566c40b"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 200.0,
+            "from": "USDT",
+            "to": "USDT",
+            "date": "2025-04-02 12:01:57",
+            "wallet_address": "e7d1f262-fd62-4196-b7d8-8da5af4c170c",
+            "id": "6e4fe2f5-09b1-4cae-8531-e28640818dfc"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 100.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-04-02 12:02:09",
+            "wallet_address": "e7d1f262-fd62-4196-b7d8-8da5af4c170c",
+            "id": "190def68-148e-4dc2-8565-12ab196ba18a"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 10.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-04-02 13:55:48",
+            "wallet_address": "cd2f6eb2-2d56-4142-9510-6a1dbb31befb",
+            "id": "c339bf05-3109-4dc5-9ee1-c4ea379a1e8e"
         }
     ]
 }

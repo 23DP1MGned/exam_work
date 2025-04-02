@@ -4,6 +4,7 @@ import os
 from app.utils import clear_console
 import uuid
 from time import sleep
+from app.utils import Color
 
 class Transactions:
     def __init__(self, transactions_type, amount, from_crypto, to_crypto, wallet_address):
@@ -49,7 +50,7 @@ class Transactions:
                     print("Transactions History:")
                     print(" ")
                     for txn in transactions:
-                        print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
                         print(" ")
                 choice=input(("Press 1 to sort transactions or Enter to go to menu: "))
                 if choice == "1":
@@ -81,7 +82,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -94,7 +95,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -109,7 +110,7 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
                 input("Press Enter to go back to the menu...")
                 break
 
@@ -127,13 +128,13 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {txn['wallet_address']} | Date: {txn['date']} | Type: {txn['type']} | From: {txn['from']} | To: {txn['to']} | Amount: {txn['amount']}")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
                 input("Press Enter to go back to the menu...")
                 break
 
 
             else:
                 print(" ")
-                print("Invalid input, please try again.")
+                print(f"{Color.RED}Invalid input, please try again.{Color.RESET}")
                 sleep(2)
             

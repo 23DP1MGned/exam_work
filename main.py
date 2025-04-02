@@ -3,18 +3,21 @@ import os
 from app.models.CryptoWallet import CryptoWallet
 from app.models.Transactions import Transactions
 from app.models.Wallets import Wallets
-from app.utils import clear_console
+from app.utils import clear_console, asci_wallet, Color
+from app.models.User import User
 
 def main():
+    asci_wallet()
     multi_wallet = Wallets()
     active_wallet = None
+    User.authenticate()
     
     while True:
         clear_console()
         if active_wallet:
-            print(f"Selected Wallet: {os.path.splitext(os.path.basename(active_wallet.filename))[0]}")
+            print(f"Selected Wallet: {Color.BLUE}{os.path.splitext(os.path.basename(active_wallet.filename))[0]}{Color.RESET}")
         else:
-            print("No Wallet selected!")
+            print(f"No {Color.BLUE}Wallet{Color.RESET} selected!")
         print(" ")
         print("___________________________________")
         print("|         Select an action:         |")

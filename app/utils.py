@@ -1,5 +1,6 @@
 import requests
 import os
+import time
 
 class CryptoConvert:
     API_URLS = {
@@ -34,3 +35,26 @@ class CryptoConvert:
 def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
 
+class Color:
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    RESET = "\033[0m"
+    PURPLE = "\033[35m"
+    GRAY = "\033[90m"
+
+def asci_wallet():
+    clear_console()
+    ascii_text = """
+     /$$      /$$               /$$  /$$                  /$$    
+    | $$  /$ | $$              | $$  | $$                | $$    
+    | $$ /$$$| $$    /$$$$$$   | $$  | $$    /$$$$$$    /$$$$$$  
+    | $$/$$ $$ $$   |____  $$  | $$  | $$   /$$__  $$  |_  $$_/  
+    | $$$$_  $$$$    /$$$$$$$  | $$  | $$  | $$$$$$$$    | $$    
+    | $$$/ \  $$$   /$$__  $$  | $$  | $$  | $$_____/    | $$ /$$
+    | $$/   \  $$  |  $$$$$$$  | $$  | $$  |  $$$$$$$    |  $$$$/
+    |__/     \__/   \_______/  |__/  |__/   \_______/     \___/  
+    """
+    print(ascii_text)
+    time.sleep(1)
