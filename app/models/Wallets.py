@@ -16,11 +16,19 @@ class Wallets:
         clear_console()
         print(f"Creating a new {Color.BLUE}wallet{Color.RESET}:")
         print(" ")
-        name = input(f"Enter new {Color.BLUE}wallet name{Color.RESET} or press {Color.GRAY}Enter{Color.RESET} to return: ")
-        if name == "":
-            return
+        while True:
+            name = input(f"Enter new {Color.BLUE}wallet name{Color.RESET} or press {Color.GRAY}Enter{Color.RESET} to return: ")
+            if name == "":
+                return
+            wallet_path = os.path.join(self.WALLET_DIR, f"{name}.json")
+        
+            if os.path.exists(wallet_path):
+                print(f"{Color.RED}A wallet with the name {Color.BLUE}{name}{Color.RED} already exists.{Color.RESET} {Color.GREEN}Please choose a different name.{Color.RESET}")
+                print("")
+            else:
+                break
+        
         address = str(uuid.uuid4())
-        wallet_path = os.path.join(self.WALLET_DIR, f"{name}.json")
         wallet = CryptoWallet(wallet_path, address=address)
         wallet.name = name
         wallet.save_wallet()
