@@ -14,7 +14,11 @@ class Wallets:
     
     def create_wallet(self):
         clear_console()
-        name = input(f"Enter new {Color.BLUE}wallet{Color.RESET} name: ")
+        print(f"Creating a new {Color.BLUE}wallet{Color.RESET}:")
+        print(" ")
+        name = input(f"Enter new {Color.BLUE}wallet name{Color.RESET} or press {Color.GRAY}Enter{Color.RESET} to return: ")
+        if name == "":
+            return
         address = str(uuid.uuid4())
         wallet_path = os.path.join(self.WALLET_DIR, f"{name}.json")
         wallet = CryptoWallet(wallet_path, address=address)
@@ -22,19 +26,25 @@ class Wallets:
         wallet.save_wallet()
         print("")
         print(f"Wallet {Color.BLUE}{name}{Color.RESET} created with address: {Color.GREEN}{address}{Color.RESET}")
+        print("")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to return...")
         return wallet
     
     def delete_wallet(self, active_wallet):
-        clear_console()
         wallets = self.get_wallets()
         if not wallets:
             print(f"{Color.RED}No available wallets!{Color.RESET}")
             return
         else:
+            clear_console()
+            print(f"Your {Color.BLUE}wallets{Color.RESET}:")
+            print("")
             for wallet in wallets:
                 print(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
                 print("")
-        address = input(f"Enter {Color.BLUE}wallet name{Color.RESET} to delete: ")
+        address = input(f"Enter {Color.BLUE}wallet name{Color.RESET} to delete or Press {Color.GRAY}Enter{Color.RESET} to return: ")
+        if address == "":
+            return
         wallet_path = os.path.join(self.WALLET_DIR, f"{address}.json")
 
         if os.path.exists(wallet_path):
@@ -74,20 +84,25 @@ class Wallets:
         return None
     
     def select_wallet(self):
-        clear_console()
         wallets = self.get_wallets()
         if not wallets:
-            print(f"{Color.RED}No available wallets{Color.RESET}!")
+            print(f"{Color.RED}No available wallets{Color.RESET}, please create a new {Color.BLUE}wallet{Color.RESET}")
             return None
-        
+        clear_console()
+        print(f"Your {Color.BLUE}wallets{Color.RESET}:")
+        print("")
         for i, wallet in enumerate(wallets):
             print(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
             print("")
         try:
-            idx = int(input(f"Select {Color.BLUE}wallet{Color.RESET} number: ")) - 1
+            idx = input(f"Select {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to return: ")
+            if idx == "":
+                return
+            else:
+                idx = int(idx)-1
             active_wallet = self.switch_wallet(wallets[idx]['address'])
-            print("")
             print(f"Selected wallet: {Color.BLUE}{wallets[idx]['name']}{Color.RESET}")
+            time.sleep(2)
             return active_wallet
         except (IndexError, ValueError):
             print(f"{Color.RED}Invalid selection!{Color.RESET}")
@@ -100,45 +115,68 @@ class Wallets:
         if not wallets:
             print(f"No available {Color.BLUE}wallets{Color.RESET}!")
         else:
+            print(f"Available {Color.BLUE}wallets{Color.RESET}:")
             for wallet in wallets:
                 print("")
                 print(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
         print("")
-        input("Press Enter to continue...")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
     def transfer_funds(self):
+        clear_console()
         wallets = self.get_wallets()
         
         if len(wallets) < 2:
             print(f"{Color.RED}Not enough wallets to make a transfer!{Color.RESET}")
             return
-        
-        print(f"Select sender {Color.BLUE}wallet{Color.RESET}:")
-        sender_wallet = self.select_wallet()
-        if not sender_wallet:
+
+        print(f"Available {Color.BLUE}wallets{Color.RESET}:")
+        for i, wallet in enumerate(wallets):
+            print(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
+
+        try:
+            print("")
+            sender_index = input(f"Select sender {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to continue: ")
+            if sender_index == "":
+                return
+            else:
+                sender_index = int(sender_index)-1
+            sender_wallet_data = wallets[sender_index]
+        except (IndexError, ValueError):
+            print(f"{Color.RED}Invalid selection!{Color.RESET}")
             return
         
-        print(f"Select receiver {Color.BLUE}wallet{Color.RESET}:")
-        receiver_wallet = self.select_wallet()
-        if not receiver_wallet or receiver_wallet.address == sender_wallet.address:
-            print(f"{Color.RED}Invalid receiver wallet{Color.RESET}!")
+        sender_wallet = self.switch_wallet(sender_wallet_data['address'])
+        try:
+            receiver_index = int(input(f"Select receiver {Color.BLUE}wallet{Color.RESET} number: ")) - 1
+            if receiver_index == sender_index:
+                print(f"{Color.RED}You cannot send funds to the same wallet!{Color.RESET}")
+                return
+            receiver_wallet_data = wallets[receiver_index]
+        except (IndexError, ValueError):
+            print(f"{Color.RED}Invalid selection!{Color.RESET}")
             return
         
+        receiver_wallet = self.switch_wallet(receiver_wallet_data['address'])
         available_cryptos = {crypto: balance for crypto, balance in sender_wallet.balances.items() if balance > 0}
         
         if not available_cryptos:
             print(f"{Color.RED}Sender has no funds available for transfer!{Color.RESET}")
             return
         
-        print(f"Available {Color.PURPLE}crypto{Color.RESET}:")
-        for i, (crypto, balance) in enumerate(available_cryptos.items(), 1):
-            print(f"{i}. {Color.PURPLE}{crypto}{Color.RESET}: {balance}")
+        print("")
+        print(f"Available {Color.PURPLE}crypto{Color.RESET} of the sender's wallet:")
+        crypto_list = list(available_cryptos.keys())
+        for i, crypto in enumerate(crypto_list, 1):
+            print(f"{i}. {Color.PURPLE}{crypto}{Color.RESET}: {available_cryptos[crypto]}")
+
         try:
-            crypto_choice = int(input(f"Select {Color.PURPLE}crypto{Color.RESET} number: ")) - 1
-            crypto_name = list(available_cryptos.keys())[crypto_choice]
+            crypto_choice = int(input(f"\nSelect {Color.PURPLE}crypto{Color.RESET} number: ")) - 1
+            crypto_name = crypto_list[crypto_choice]
         except (IndexError, ValueError):
             print(f"{Color.RED}Invalid selection!{Color.RESET}")
             return
+
         try:
             amount = float(input(f"Enter amount of {Color.PURPLE}{crypto_name}{Color.RESET} to transfer: "))
             if amount <= 0 or amount > available_cryptos[crypto_name]:
@@ -147,6 +185,8 @@ class Wallets:
         except ValueError:
             print(f"{Color.RED}Invalid input!{Color.RESET}")
             return
+        
+        
         def withdraw_local(wallet, crypto, amount):
             if wallet.balances[crypto] >= amount:
                 wallet.balances[crypto] -= amount
@@ -161,5 +201,6 @@ class Wallets:
         
         if withdraw_local(sender_wallet, crypto_name, amount):
             top_up_local(receiver_wallet, crypto_name, amount)
-            print(f"{Color.GREEN}Successfully transferred{Color.RESET} {Color.PURPLE}{amount} {crypto_name}{Color.RESET} from {Color.GREEN}{os.path.basename(sender_wallet.filename)}{Color.RESET} to {Color.GREEN}{os.path.basename(receiver_wallet.filename)}{Color.RESET}!")
-            time.sleep(2)
+            print(f"Successfully transferred {Color.BLUE}{amount}{Color.RESET} {Color.PURPLE}{crypto_name}{Color.RESET} from {Color.GREEN}{os.path.basename(sender_wallet.filename)}{Color.RESET} to {Color.GREEN}{os.path.basename(receiver_wallet.filename)}{Color.RESET}!")
+            print("")
+            input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")

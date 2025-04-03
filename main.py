@@ -18,18 +18,17 @@ def main():
             print(f"Selected Wallet: {Color.BLUE}{os.path.splitext(os.path.basename(active_wallet.filename))[0]}{Color.RESET}")
         else:
             print(f"No {Color.BLUE}Wallet{Color.RESET} selected!")
-        print(" ")
         print("___________________________________")
         print("|         Select an action:         |")
         print("|                                   | ")
-        print("|  1 - Select wallet                |")
-        print("|  2 - Create new wallet            |")
-        print("|  3 - Delete wallet                |")
-        print("|  4 - View all wallets             |")
-        print("|  5 - Transfer funds               |")
-        print("|  6 - View transactions            |")
-        print("|  7 - Wallet operations            |")
-        print("|  8 - Exit                         |")
+        print(f"|  {Color.YELLOW}1{Color.RESET} - Select {Color.BLUE}wallet{Color.RESET}                |")
+        print(f"|  {Color.YELLOW}2{Color.RESET} - Create new {Color.BLUE}wallet{Color.RESET}            |")
+        print(f"|  {Color.YELLOW}3{Color.RESET} - Delete {Color.BLUE}wallet{Color.RESET}                |")
+        print(f"|  {Color.YELLOW}4{Color.RESET} - View all wallets             |")
+        print(f"|  {Color.YELLOW}5{Color.RESET} - Transfer funds               |")
+        print(f"|  {Color.YELLOW}6{Color.RESET} - View transactions            |")
+        print(f"|  {Color.YELLOW}7{Color.RESET} - {Color.BLUE}Wallet{Color.RESET} operations            |")
+        print(f"|  {Color.YELLOW}8{Color.RESET} - {Color.RED}Exit{Color.RESET}                         |")
         print("___________________________________")
         print(" ")
         
@@ -61,8 +60,8 @@ def main():
 
         elif choice == "7":
             if not active_wallet:
-                print("No active wallet selected!")
-                time.sleep(1)
+                print(f"{Color.RED}No active wallet selected{Color.RESET}, please select {Color.BLUE}wallet{Color.RESET}!")
+                time.sleep(2.5)
                 continue
             while True:
                 clear_console()
@@ -99,12 +98,12 @@ def main():
                 elif sub_choice == "6":
                     break
                 else:
-                    print("Invalid input, please try again.")
+                    print(f"{Color.RED}Invalid input, please try again.{Color.RESET}")
                 time.sleep(1)
         
         elif choice == "8":
             clear_console()
-            print("Exit...")
+            print(f"{Color.RED}Exit...{Color.RESET}")
             if active_wallet:
                 active_wallet.save_wallet()
             break

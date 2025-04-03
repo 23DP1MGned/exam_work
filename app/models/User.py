@@ -1,6 +1,7 @@
 import os
 import json
-from app.utils import clear_console
+from app.utils import clear_console, Color
+import time
 
 class User:
     user_file = "user_data.json"
@@ -16,11 +17,12 @@ class User:
             json.dump({"login": login, "password": password}, file)
 
     def register():
-        print("No user found. Please register.")
+        print(f"{Color.RED}No user found.{Color.RESET} {Color.GREEN}Please register.{Color.RESET}")
         login = input("Enter your login: ")
         password = input("Enter your password: ")
         User.save_user_data(login, password)
-        print("Registration successful!")
+        print(f"{Color.GREEN}Registration successful!{Color.RESET}")
+        time.sleep(2)
 
     def authenticate():
         clear_console()

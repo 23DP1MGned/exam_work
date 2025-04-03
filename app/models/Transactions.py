@@ -50,18 +50,17 @@ class Transactions:
                     print("Transactions History:")
                     print(" ")
                     for txn in transactions:
-                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
+                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
                         print(" ")
-                choice=input(("Press 1 to sort transactions or Enter to go to menu: "))
+                choice=input((f"Press 1 to sort transactions or {Color.GRAY}Enter{Color.RESET} to return: "))
                 if choice == "1":
                     clear_console()
                     print("")
                     Transactions.sort_transactions(transactions)
                 else:
                     print(" ")
-           # input("Press Enter to go back to the menu...")
         except(FileNotFoundError, json.JSONDecodeError):
-            print("No transactions found")
+            print(f"{Color.RED}No transactions found{Color.RESET}")
 
 
     def sort_transactions(transactions):
@@ -82,8 +81,8 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
-                input("Press Enter to go back to the menu...")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
 
@@ -95,8 +94,8 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
-                input("Press Enter to go back to the menu...")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
 
@@ -110,8 +109,8 @@ class Transactions:
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
-                input("Press Enter to go back to the menu...")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
 
@@ -122,14 +121,14 @@ class Transactions:
                 from_currency = input("Enter 'from' crypto: ").strip().upper()
                 to_currency = input("Enter 'to' crypto: ").strip().upper()
                 transactions = [txn for txn in transactions if txn["from"] == from_currency and txn["to"] == to_currency]
-                order = input("Sort by currency increase(1)/decrease(2): ").s0trip().lower()
+                order = input("Sort by currency increase(1)/decrease(2): ").strip().lower()
                 transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
                 print("")
                 for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']}{Color.RESET}")
-                input("Press Enter to go back to the menu...")
+                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
 

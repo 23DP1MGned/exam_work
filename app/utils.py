@@ -57,4 +57,4 @@ def asci_wallet():
     |__/     \__/   \_______/  |__/  |__/   \_______/     \___/  
     """
     print(ascii_text)
-    time.sleep(1)
+    time.sleep(2)

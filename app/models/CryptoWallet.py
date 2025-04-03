@@ -83,16 +83,17 @@ class CryptoWallet:
         time.sleep(random.uniform(2, 4))
         self.balances["USDT"] += amount
         self.save_wallet()
-        print(f"The balance is replenished by {Color.BLUE}{amount:.2f}{Color.BLUE} USDT from card {Color.GREEN}{formatted_card}{Color.GREEN}")
-        Transactions.save_transactions(Transactions("Balance replenishment", amount, "USDT", "USDT", self.address))
-        time.sleep(1)
+        print(f"The balance is replenished by {Color.BLUE}{amount:.2f} USDT{Color.RESET} from card {Color.GREEN}{formatted_card}{Color.RESET}")
+        Transactions.save_transactions(Transactions("Balance replenishment", amount, "my card", "USDT", self.address))
+        print("")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
     def usdt_to_crypto(self):
         
         print(" ")
         print(f"Your USDT balance: {Color.BLUE}{self.balances.get("USDT", 0)}{Color.RESET} USDT")
         print(" ")
-        crypto = input("Enter Crypto (BTC, ETH, SOL, DOT, TON, DOGE, LTC, XRP, ADA, AVAX) or Enter to return: ").upper()
+        crypto = input(f"Enter Crypto {Color.PURPLE}(BTC, ETH, SOL, DOT, TON, DOGE, LTC, XRP, ADA, AVAX){Color.RESET} or {Color.GRAY}Enter{Color.RESET} to return: ").upper()
         if crypto == "":
             return
         else:
@@ -108,75 +109,83 @@ class CryptoWallet:
         self.balances["USDT"] -= amount
         self.balances[crypto] += crypto_amount
         self.save_wallet()
-        print(f"Converted: {Color.BLUE}{amount:.8f}{Color.RESET} USDT -> {Color.PURPLE}{crypto_amount:.8f}{Color.RESET} {Color.BLUE}{crypto}{Color.RESET}")
+        print(f"Converted: {Color.BLUE}{amount:.8f}{Color.RESET} {Color.PURPLE}USDT{Color.RESET} -> {Color.BLUE}{crypto_amount:.8f}{Color.RESET} {Color.PURPLE}{crypto}{Color.RESET}")
         Transactions.save_transactions(Transactions("Converting to crypto", amount, "USDT", crypto, self.address))
+        print("")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
     def crypto_to_usdt(self):
-
         filtered_balances = {crypto: amount for crypto, amount in self.balances.items() if amount > 0 and crypto.upper() != "USDT"}
-        if filtered_balances:
-            print("Your Crypto:")
-            print(" ")
-            for crypto, amount in filtered_balances.items():
-                print(f"{crypto}: {Color.PURPLE}{amount:.8f}{Color.RESET}")
-        else:
-            print("You have no Сrypto on your balance.")
-        if filtered_balances:
-            print(" ")
-            crypto = input("Enter Crypto or Enter to return: ").upper()
-            if crypto == "":
-                    return
-            else:
-                amount = float(input("Enter the amount to convert: "))
-        else:
-            print(" ")
-            input("Press Enter to return to the main menu...")
 
-        if crypto not in SUPPORTED_CRYPTOS:
-            print("Error: Unsupported Crypto!")
+        if not filtered_balances:
+            print(f"You have no {Color.PURPLE}Crypto{Color.RESET} on your balance.")
+            input(f"Press {Color.GRAY}Enter{Color.RESET} to return...")
             return
+
+        print(f"Your {Color.PURPLE}Crypto{Color.RESET}:")
+        print("")
+        for crypto, amount in filtered_balances.items():
+            print(f"{Color.PURPLE}{crypto}{Color.RESET}: {Color.BLUE}{amount:.8f}{Color.RESET}")
+        print(" ")
+
+        crypto = input(f"Enter {Color.PURPLE}Crypto{Color.RESET} to convert or {Color.GRAY}Enter{Color.RESET} to return: ").upper()
+        if crypto == "":
+            return
+
+        if crypto not in filtered_balances:
+            print(f"{Color.RED}Unsupported or empty Crypto!{Color.RESET}")
+            return
+        try:
+            amount = float(input(f"Enter the {Color.BLUE}amount{Color.RESET} to convert: "))
+        except ValueError:
+            print(f"{Color.RED}Invalid amount!{Color.RESET}")
+            return
+
         if amount > self.balances[crypto]:
-            print("Error: Insufficient funds!")
+            print(f"{Color.RED}Insufficient funds!{Color.RESET}")
             return
-        
+
         rate = CryptoConvert.crypto_rate(crypto)
         if rate == 0:
-            print("Error: Failed to get exchange rate!")
+            print(f"{Color.RED}Failed to get exchange rate!{Color.RESET}")
             return
-        
+
         usdt_amount = amount * rate
         self.balances[crypto] -= amount
         self.balances["USDT"] += usdt_amount
         self.save_wallet()
-        print(f"Converted: {amount:.8f} {crypto} -> {usdt_amount:.8f} USDT")
-        
+
+        print(f"Converted: {Color.BLUE}{amount:.8f}{Color.RESET} {Color.PURPLE}{crypto}{Color.RESET} -> {Color.BLUE}{usdt_amount:.8f}{Color.RESET} {Color.PURPLE}USDT{Color.RESET}")
+
         Transactions.save_transactions(Transactions("Converting to USDT", amount, crypto, "USDT", self.address))
+
+        print(" ")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
     def withdraw(self):
 
-        print("Available balances:")
+        print(f"Available {Color.BLUE}balances{Color.RESET}:")
         print("")
         for crypto, amount in self.balances.items():
             if amount > 0:
-                print(f"{crypto}: {amount:.8f}")
+                print(f"{Color.PURPLE}{crypto}{Color.RESET}: {Color.BLUE}{amount:.8f}{Color.RESET}")
         print(" ")
-        crypto = input("Enter the crypto to withdraw or Enter to return: ").upper()
+        crypto = input(f"Enter the {Color.PURPLE}Crypto{Color.RESET} to withdraw or {Color.GRAY}Enter{Color.RESET} to return: ").upper()
         if crypto == "":
             return
         else:
-            amount = float(input("Enter the amount to withdraw: "))
-            time.sleep(2)
+            amount = float(input(f"Enter the {Color.BLUE}amount{Color.RESET} to withdraw: "))
                 
         if crypto not in self.balances:
-            print("Error: Unsupported crypto.")
+            print(f"{Color.RED}Unsupported crypto!{Color.RESET}")
             return
         if self.balances[crypto] < amount:
-            print("Error: Not enough funds on balance.")
+            print(f"{Color.RED}Not enough funds on balance!{Color.RESET}")
             return
         
-        card_number = input("Enter card number (16 digits): ")
+        card_number = input(f"Enter {Color.GREEN}card number{Color.RESET} (16 digits): ")
         if not (card_number.isdigit() and len(card_number) == 16):
-            print("Error: Invalid card data.")
+            print(f"{Color.RED}Invalid card data!{Color.RESET}")
             return
         formatted_card = ' '.join([card_number[i:i+4] for i in range(0, 16, 4)])
 
@@ -185,16 +194,17 @@ class CryptoWallet:
         time.sleep(random.uniform(2, 4))
         self.balances[crypto] -= amount
         self.save_wallet()
-        transaction = Transactions("Withdrawing", amount, crypto, None, self.address )
+        transaction = Transactions("Withdrawing", amount, crypto, "card number", self.address )
         Transactions.save_transactions(transaction)
-        print(f"Withdrawal completed! {amount:.8f} {crypto} sent to card {formatted_card}.")
-        time.sleep(2)
+        print(f"Withdrawal completed! {Color.BLUE}{amount:.8f}{Color.RESET} {Color.PURPLE}{crypto}{Color.RESET} sent to card {Color.GREEN}{formatted_card}{Color.RESET}.")
+        print("")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
     
     def view_all_crypto(self):
-        print("Available balances:")
+        print(f"Available {Color.BLUE}balances{Color.RESET}:")
         print("")
         for crypto, amount in self.balances.items():
             if amount > 0:
-                print(f"{crypto}: {amount:.8f}")
+                print(f"{Color.PURPLE}{crypto}{Color.RESET}: {Color.BLUE}{amount:.8f}{Color.RESET}")
         print(" ")
-        input("Press Enter to return to menu...")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
