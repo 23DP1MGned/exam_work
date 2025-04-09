@@ -35,7 +35,7 @@ class Wallets:
         print("")
         print(f"Wallet {Color.BLUE}{name}{Color.RESET} created with address: {Color.GREEN}{address}{Color.RESET}")
         print("")
-        input(f"Press {Color.GRAY}Enter{Color.RESET} to return...")
+        input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
         return wallet
     
     def delete_wallet(self, active_wallet):
@@ -110,7 +110,7 @@ class Wallets:
                 idx = int(idx)-1
             active_wallet = self.switch_wallet(wallets[idx]['address'])
             print(f"Selected wallet: {Color.BLUE}{wallets[idx]['name']}{Color.RESET}")
-            time.sleep(2)
+            time.sleep(1)
             return active_wallet
         except (IndexError, ValueError):
             print(f"{Color.RED}Invalid selection!{Color.RESET}")
@@ -144,7 +144,7 @@ class Wallets:
 
         try:
             print("")
-            sender_index = input(f"Select sender {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to continue: ")
+            sender_index = input(f"Select sender {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to return: ")
             if sender_index == "":
                 return
             else:

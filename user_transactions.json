@@ -1,0 +1,31 @@
+{
+    "transactions": [
+        {
+            "type": "Balance replenishment",
+            "amount": 1000.0,
+            "from": "my card",
+            "to": "USDT",
+            "date": "2025-04-09 07:57:45",
+            "wallet_address": "341a4f7b-bb88-404f-9f9f-7fcbd4567ea4",
+            "id": "36a4642b-f0b1-43e2-a4cb-4d397f42d84c"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 1000.0,
+            "from": "USDT",
+            "to": "AVAX",
+            "date": "2025-04-09 07:58:15",
+            "wallet_address": "341a4f7b-bb88-404f-9f9f-7fcbd4567ea4",
+            "id": "a7d0d757-cf6a-4dbe-9b98-28a80ad0f317"
+        },
+        {
+            "type": "Withdrawing",
+            "amount": 100.0,
+            "from": "USDT",
+            "to": "card number",
+            "date": "2025-04-09 08:15:56",
+            "wallet_address": "2aa792bd-809b-44a2-8be0-d1ca192313fe",
+            "id": "1e4680df-bea2-4a11-b4a0-8d003e946d23"
+        }
+    ]
+}

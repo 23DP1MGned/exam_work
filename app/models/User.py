@@ -2,6 +2,7 @@ import os
 import json
 from app.utils import clear_console, Color
 import time
+from app.interfaces import registr
 
 class User:
     user_file = "user_data.json"
@@ -27,4 +28,5 @@ class User:
     def authenticate():
         clear_console()
         if not User.load_user_data():
+            registr()
             User.register()
