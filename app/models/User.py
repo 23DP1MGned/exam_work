@@ -1,6 +1,7 @@
 import os
 import json
-from app.utils import clear_console, Color
+from app.utils import clear_console
+from app.interfaces import Color
 import time
 from app.interfaces import registr
 

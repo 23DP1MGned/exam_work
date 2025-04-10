@@ -1,6 +1,7 @@
 import json
 import os
-from app.utils import CryptoConvert, Color
+from app.utils import CryptoConvert
+from app.interfaces import Color
 from app.models.Transactions import Transactions
 import time
 import random
@@ -61,6 +62,8 @@ class CryptoWallet:
 
 
     def top_up(self):
+        print(f"{Color.BLUE}Balance replenishment{Color.RESET}:")
+        print("")
         amount = input(f"Enter the amount in {Color.BLUE}USDT{Color.RESET} or {Color.GRAY}Enter{Color.RESET} to return: ")
         if amount == "":
             return
@@ -121,7 +124,6 @@ class CryptoWallet:
             print(f"You have no {Color.PURPLE}Crypto{Color.RESET} on your balance.")
             input(f"Press {Color.GRAY}Enter{Color.RESET} to return...")
             return
-
         print(f"Your {Color.PURPLE}Crypto{Color.RESET}:")
         print("")
         for crypto, amount in filtered_balances.items():

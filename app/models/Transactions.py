@@ -4,7 +4,8 @@ import os
 from app.utils import clear_console
 import uuid
 from time import sleep
-from app.utils import Color
+from app.utils import framed_transaction, framed_menu
+from app.interfaces import Color
 
 class Transactions:
     def __init__(self, transactions_type, amount, from_crypto, to_crypto, wallet_address):
@@ -47,11 +48,13 @@ class Transactions:
                 transactions = data.get("transactions", [])
                     
                 if transactions:
-                    print("Transactions History:")
-                    print(" ")
+                    print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
+                    print(framed_transaction("Transactions History:"))
+                    print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
                     for txn in transactions:
-                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
-                        print(" ")
+                        print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
+                        print(framed_transaction(" "))
+                    print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 choice=input((f"Press 1 to sort transactions or {Color.GRAY}Enter{Color.RESET} to return: "))
                 if choice == "1":
                     clear_console()
@@ -66,12 +69,15 @@ class Transactions:
     def sort_transactions(transactions):
         while True:
             clear_console()
-            print("Choose sorting option:")
-            print("1 - Date")
-            print("2 - Amount")
-            print("3 - Type")
-            print("4 - Crypto pairs")
-            choice = input("Enter option (1-4): ")
+            print("╔════════════════════════════════════════╗")
+            print(framed_menu(f"{Color.BLUE}Choose sorting option{Color.RESET}:"))
+            print("╠════════════════════════════════════════╣")
+            print(framed_menu(f"{Color.YELLOW}[1]{Color.RESET} Date"))
+            print(framed_menu(f"{Color.YELLOW}[2]{Color.RESET} Amount"))
+            print(framed_menu(f"{Color.YELLOW}[3]{Color.RESET} Type"))
+            print(framed_menu(f"{Color.YELLOW}[4]{Color.RESET} Crypto pairs"))
+            print("╚════════════════════════════════════════╝")
+            choice = input("Enter option: ")
             
             if choice == "1":
                 clear_console()

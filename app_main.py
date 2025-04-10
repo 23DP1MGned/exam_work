@@ -3,7 +3,7 @@ import os
 from app.models.CryptoWallet import CryptoWallet
 from app.models.Transactions import Transactions
 from app.models.Wallets import Wallets
-from app.utils import clear_console
+from app.utils import clear_console, framed_menu
 from app.interfaces import asci_wallet, Color
 from app.models.User import User
 
@@ -14,20 +14,23 @@ def app_main():
     
     while True:
         clear_console()
+        print(" ")
         print("╔════════════════════════════════════════╗")
+        print("║             Wallet Menu                ║")
+        print("╠════════════════════════════════════════╣")
         if active_wallet:
-            print(f"   Selected Wallet: {Color.BLUE}{os.path.splitext(os.path.basename(active_wallet.filename))[0]}{Color.RESET}")
+            print(framed_menu(f"Selected Wallet: {Color.BLUE}{os.path.splitext(os.path.basename(active_wallet.filename))[0]}{Color.RESET}"))
         else:
-            print(f"   No {Color.BLUE}Wallet{Color.RESET} selected!")
-        print("╔════════════════════════════════════════╗")
-        print(f"║  {Color.YELLOW}1{Color.RESET} - Select wallet                     ║")
-        print(f"║  {Color.YELLOW}2{Color.RESET} - Create new wallet                 ║")
-        print(f"║  {Color.YELLOW}3{Color.RESET} - Delete wallet                     ║")
-        print(f"║  {Color.YELLOW}4{Color.RESET} - View all wallets                  ║")
-        print(f"║  {Color.YELLOW}5{Color.RESET} - Transfer funds                    ║")
-        print(f"║  {Color.YELLOW}6{Color.RESET} - View transactions                 ║")
-        print(f"║  {Color.YELLOW}7{Color.RESET} - Wallet operations                 ║")
-        print(f"║  {Color.YELLOW}8{Color.RESET} - {Color.RED}Exit{Color.RESET}                              ║")
+            print(framed_menu(f"No {Color.BLUE}Wallet{Color.RESET} selected! "))
+        print("╠════════════════════════════════════════╣")
+        print(f"║  {Color.YELLOW}[1]{Color.RESET} Select wallet                     ║")
+        print(f"║  {Color.YELLOW}[2]{Color.RESET} Create new wallet                 ║")
+        print(f"║  {Color.YELLOW}[3]{Color.RESET} Delete wallet                     ║")
+        print(f"║  {Color.YELLOW}[4]{Color.RESET} View all wallets                  ║")
+        print(f"║  {Color.YELLOW}[5]{Color.RESET} Transfer funds                    ║")
+        print(f"║  {Color.YELLOW}[6]{Color.RESET} View transactions                 ║")
+        print(f"║  {Color.YELLOW}[7]{Color.RESET} Wallet operations                 ║")
+        print(f"║  {Color.YELLOW}[8]{Color.RESET} {Color.RED}Exit{Color.RESET}                              ║")
         print("╚════════════════════════════════════════╝")
         print(" ")
         
@@ -50,7 +53,9 @@ def app_main():
             time.sleep(1)
 
         elif choice == "5":
-            multi_wallet.transfer_funds()
+            new_wallet = multi_wallet.transfer_funds(active_wallet)
+            if new_wallet is not None:
+                active_wallet = new_wallet
             time.sleep(1)
 
         elif choice == "6":
@@ -64,17 +69,18 @@ def app_main():
                 continue
             while True:
                 clear_console()
+                print(" ")
                 active_wallet.total_balance()
 
                 print("╔═══════════════════════════════════════╗")
                 print("║           Wallet Operations           ║")
                 print("╠═══════════════════════════════════════╣")
-                print(f"║  {Color.YELLOW}1{Color.RESET} - Top up balance in USDT           ║")
-                print(f"║  {Color.YELLOW}2{Color.RESET} - Convert USDT to Crypto           ║")
-                print(f"║  {Color.YELLOW}3{Color.RESET} - Convert Crypto to USDT           ║")
-                print(f"║  {Color.YELLOW}4{Color.RESET} - Withdraw funds                   ║")
-                print(f"║  {Color.YELLOW}5{Color.RESET} - View your crypto                 ║")
-                print(f"║  {Color.YELLOW}6{Color.RESET} - Back                             ║")
+                print(f"║  {Color.YELLOW}[1]{Color.RESET} Top up balance in USDT           ║")
+                print(f"║  {Color.YELLOW}[2]{Color.RESET} Convert USDT to Crypto           ║")
+                print(f"║  {Color.YELLOW}[3]{Color.RESET} Convert Crypto to USDT           ║")
+                print(f"║  {Color.YELLOW}[4]{Color.RESET} Withdraw funds                   ║")
+                print(f"║  {Color.YELLOW}[5]{Color.RESET} View your crypto                 ║")
+                print(f"║  {Color.YELLOW}[6]{Color.RESET} Back                             ║")
                 print("╚═══════════════════════════════════════╝")
                 print(" ")
                 

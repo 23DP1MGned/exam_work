@@ -1,6 +1,7 @@
 import requests
 import os
 import time
+import re
 
 class CryptoConvert:
     API_URLS = {
@@ -58,3 +59,46 @@ def asci_wallet():
     """
     print(ascii_text)
     time.sleep(2)
+
+def framed_menu(content: str, width: int = 51) -> str:
+        line = f"   {content}"
+        if len(line) > width - 2:
+            line = line[:width - 5] + "..."
+        padded_line = line.ljust(width - 2)
+        return f"║{padded_line}║"
+
+def framed_adress(content: str, width: int = 71) -> str:
+        def strip_ansi(text): return re.sub(r'\x1B\[[0-?]*[ -/]*[@-~]', '', text)
+        line = f"   {content}"
+        vis_len = len(strip_ansi(line))
+
+        if vis_len > width - 2:
+            trimmed, count, in_ansi = "", 0, False
+            for c in line:
+                if c == '\033': in_ansi = True
+                if not in_ansi: count += 1
+                trimmed += c
+                if in_ansi and c.isalpha(): in_ansi = False
+                if count >= width - 5: break
+            line = trimmed + "..."
+
+        pad = " " * (width - 2 - len(strip_ansi(line)))
+        return f"║{line}{pad}║"
+
+def framed_transaction(content: str, width: int = 170) -> str:
+        def strip_ansi(text): return re.sub(r'\x1B\[[0-?]*[ -/]*[@-~]', '', text)
+        line = f"   {content}"
+        vis_len = len(strip_ansi(line))
+
+        if vis_len > width - 2:
+            trimmed, count, in_ansi = "", 0, False
+            for c in line:
+                if c == '\033': in_ansi = True
+                if not in_ansi: count += 1
+                trimmed += c
+                if in_ansi and c.isalpha(): in_ansi = False
+                if count >= width - 5: break
+            line = trimmed + "..."
+
+        pad = " " * (width - 2 - len(strip_ansi(line)))
+        return f"║{line}{pad}║"

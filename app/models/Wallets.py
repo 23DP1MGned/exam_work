@@ -2,7 +2,8 @@ import os
 import json
 import uuid
 from app.models.CryptoWallet import CryptoWallet
-from app.utils import clear_console, Color
+from app.utils import clear_console, framed_adress
+from app.interfaces import Color
 import time
 
 class Wallets:
@@ -45,11 +46,13 @@ class Wallets:
             return
         else:
             clear_console()
-            print(f"Your {Color.BLUE}wallets{Color.RESET}:")
-            print("")
+            print("╔═════════════════════════════════════════════════════════════════════╗")
+            print(framed_adress(f"Your {Color.BLUE}wallets{Color.RESET}:"))
+            print("╠═════════════════════════════════════════════════════════════════════╣")
             for wallet in wallets:
-                print(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
-                print("")
+                print(framed_adress(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
+                print(framed_adress(""))
+            print("╚═════════════════════════════════════════════════════════════════════╝")
         address = input(f"Enter {Color.BLUE}wallet name{Color.RESET} to delete or Press {Color.GRAY}Enter{Color.RESET} to return: ")
         if address == "":
             return
@@ -97,11 +100,13 @@ class Wallets:
             print(f"{Color.RED}No available wallets{Color.RESET}, please create a new {Color.BLUE}wallet{Color.RESET}")
             return None
         clear_console()
-        print(f"Your {Color.BLUE}wallets{Color.RESET}:")
-        print("")
+        print("╔═════════════════════════════════════════════════════════════════════╗")
+        print(framed_adress(f"Your {Color.BLUE}wallets{Color.RESET}:"))
+        print("╠═════════════════════════════════════════════════════════════════════╣")
         for i, wallet in enumerate(wallets):
-            print(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
-            print("")
+            print(framed_adress(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
+            print(framed_adress(""))
+        print("╚═════════════════════════════════════════════════════════════════════╝")
         try:
             idx = input(f"Select {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to return: ")
             if idx == "":
@@ -110,7 +115,7 @@ class Wallets:
                 idx = int(idx)-1
             active_wallet = self.switch_wallet(wallets[idx]['address'])
             print(f"Selected wallet: {Color.BLUE}{wallets[idx]['name']}{Color.RESET}")
-            time.sleep(1)
+            #time.sleep(1)
             return active_wallet
         except (IndexError, ValueError):
             print(f"{Color.RED}Invalid selection!{Color.RESET}")
@@ -121,27 +126,31 @@ class Wallets:
         clear_console()
         wallets = self.get_wallets()
         if not wallets:
-            print(f"No available {Color.BLUE}wallets{Color.RESET}!")
+            print(f"{Color.RED}No available wallets{Color.RESET}!")
         else:
-            print(f"Available {Color.BLUE}wallets{Color.RESET}:")
+            print("╔═════════════════════════════════════════════════════════════════════╗")
+            print(framed_adress(f"Available {Color.BLUE}wallets{Color.RESET}:"))
+            print("╠═════════════════════════════════════════════════════════════════════╣")
             for wallet in wallets:
-                print("")
-                print(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
-        print("")
+                print(framed_adress(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
+                print(framed_adress(""))
+            print("╚═════════════════════════════════════════════════════════════════════╝")
         input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
-    def transfer_funds(self):
-        clear_console()
+    def transfer_funds(self, active_wallet):
         wallets = self.get_wallets()
         
         if len(wallets) < 2:
             print(f"{Color.RED}Not enough wallets to make a transfer!{Color.RESET}")
             return
-
-        print(f"Available {Color.BLUE}wallets{Color.RESET}:")
+        clear_console()
+        print("╔═════════════════════════════════════════════════════════════════════╗")
+        print(framed_adress(f"Available {Color.BLUE}wallets{Color.RESET}:"))
+        print("╠═════════════════════════════════════════════════════════════════════╣")
         for i, wallet in enumerate(wallets):
-            print(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}")
-
+            print(framed_adress(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
+            print(framed_adress(""))
+        print("╚═════════════════════════════════════════════════════════════════════╝")
         try:
             print("")
             sender_index = input(f"Select sender {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to return: ")
@@ -209,6 +218,9 @@ class Wallets:
         
         if withdraw_local(sender_wallet, crypto_name, amount):
             top_up_local(receiver_wallet, crypto_name, amount)
+            if sender_wallet.address == active_wallet.address or receiver_wallet.address == active_wallet.address:
+                active_wallet = self.switch_wallet(active_wallet.address)
             print(f"Successfully transferred {Color.BLUE}{amount}{Color.RESET} {Color.PURPLE}{crypto_name}{Color.RESET} from {Color.GREEN}{os.path.basename(sender_wallet.filename)}{Color.RESET} to {Color.GREEN}{os.path.basename(receiver_wallet.filename)}{Color.RESET}!")
             print("")
             input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
+            return active_wallet
