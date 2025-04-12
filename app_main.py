@@ -10,6 +10,7 @@ from app.models.User import User
 def app_main():
     multi_wallet = Wallets()
     active_wallet = None
+    asci_wallet()
     User.authenticate()
     
     while True:

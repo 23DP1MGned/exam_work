@@ -218,9 +218,9 @@ class Wallets:
         
         if withdraw_local(sender_wallet, crypto_name, amount):
             top_up_local(receiver_wallet, crypto_name, amount)
-            if sender_wallet.address == active_wallet.address or receiver_wallet.address == active_wallet.address:
+            if active_wallet and (sender_wallet.address == active_wallet.address or receiver_wallet.address == active_wallet.address):
                 active_wallet = self.switch_wallet(active_wallet.address)
-            print(f"Successfully transferred {Color.BLUE}{amount}{Color.RESET} {Color.PURPLE}{crypto_name}{Color.RESET} from {Color.GREEN}{os.path.basename(sender_wallet.filename)}{Color.RESET} to {Color.GREEN}{os.path.basename(receiver_wallet.filename)}{Color.RESET}!")
+            print(f"Successfully transferred {Color.BLUE}{amount}{Color.RESET} {Color.PURPLE}{crypto_name}{Color.RESET} from {Color.GREEN}{os.path.splitext(os.path.basename(sender_wallet.filename))[0]}{Color.RESET} to {Color.GREEN}{os.path.splitext(os.path.basename(receiver_wallet.filename))[0]}{Color.RESET}!")
             print("")
             input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
             return active_wallet

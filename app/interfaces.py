@@ -24,7 +24,7 @@ def asci_wallet():
     |__/     \__/   \_______/  |__/  |__/   \_______/     \___/  
     """
     print(ascii_text)
-    time.sleep(2)
+    time.sleep(1.5)
 
 def registr():
     clear_console()

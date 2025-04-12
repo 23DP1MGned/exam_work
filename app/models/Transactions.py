@@ -81,44 +81,54 @@ class Transactions:
             
             if choice == "1":
                 clear_console()
-                order = input("Sort by date increase(1)/decrease(2): ").strip().lower()
+                while True:
+                    order = input(f"Sort by date {Color.GREEN}increase(1){Color.RESET}/{Color.RED}decrease(2){Color.RESET}: ").strip().lower()
+                    if order not in ("1", "2"):
+                        print(f"{Color.RED}Invalid input. Please enter 1 or 2.{Color.RESET}")
+                        continue
+                    break
+
                 transactions.sort(key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d %H:%M:%S"), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
-                print("")
                 for txn in transactions:
                     print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
-
 
             elif choice == "2":
                 clear_console()
-                order = input("Sort by amount increase(1)/decrease(2): ").strip().lower()
+                while True:
+                    order = input(f"Sort by amount {Color.GREEN}increase(1){Color.RESET}/{Color.RED}decrease(2){Color.RESET}: ").strip().lower()
+                    if order not in ("1", "2"):
+                        print(f"{Color.RED}Invalid input. Please enter 1 or 2.{Color.RESET}")
+                        continue
+                    break
+
                 transactions.sort(key=lambda x: float(x["amount"]), reverse=(order == "2"))
 
                 print("Sorted Transactions History:")
-                print("")
                 for txn in transactions:
                     print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
-
 
             elif choice == "3":
                 clear_console()
                 transaction_types = set(txn["type"].lower() for txn in transactions)
                 print("Available transaction types:", ", ".join(transaction_types))
                 transaction_type = input("Enter transaction type to filter by: ").strip().lower()
-                transactions = [txn for txn in transactions if txn["type"].lower() == transaction_type]
+                filtered_transactions = [txn for txn in transactions if txn["type"].lower() == transaction_type]
 
-                print("Sorted Transactions History:")
-                print("")
-                for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                if not filtered_transactions:
+                    print(f"{Color.RED}No transactions found with this type.{Color.RESET}")
+                else:
+                    print("Filtered Transactions History:")
+                    for txn in filtered_transactions:
+                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
-
 
             elif choice == "4":
                 clear_console()
@@ -126,20 +136,23 @@ class Transactions:
                 print("Available crypto pairs:", ", ".join([f"{pair[0]} -> {pair[1]}" for pair in currencies]))
                 from_currency = input("Enter 'from' crypto: ").strip().upper()
                 to_currency = input("Enter 'to' crypto: ").strip().upper()
-                transactions = [txn for txn in transactions if txn["from"] == from_currency and txn["to"] == to_currency]
-                order = input("Sort by currency increase(1)/decrease(2): ").strip().lower()
-                transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "2"))
+                filtered_transactions = [txn for txn in transactions if txn["from"] == from_currency and txn["to"] == to_currency]
 
-                print("Sorted Transactions History:")
-                print("")
-                for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                if not filtered_transactions:
+                    print(f"{Color.RED}No transactions found for this crypto pair.{Color.RESET}")
+                else:
+                    while True:
+                        order = input(f"Sort by currency {Color.GREEN}increase(1){Color.RESET}/{Color.RED}decrease(2){Color.RESET}: ").strip().lower()
+                        if order not in ("1", "2"):
+                            print(f"{Color.RED}Invalid input. Please enter 1 or 2.{Color.RESET}")
+                            continue
+                        break
+
+                    filtered_transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "2"))
+
+                    print("Filtered Transactions History:")
+                    for txn in filtered_transactions:
+                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
-
-
-            else:
-                print(" ")
-                print(f"{Color.RED}Invalid input, please try again.{Color.RESET}")
-                sleep(2)
-            
