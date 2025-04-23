@@ -18,16 +18,18 @@ A simple console crypto wallet application built with Python 3. This project all
 
 ---
 
-## Project Structure
-exam_work-main/
-├── app/                       # Application logic (services, utilities, etc.)
-├── main.py                   # Main entry point of the application
-├── app_main.py               # Main user interface/controller of the app
-├── user_data.json            # User data
-├── user_transactions.json    # All user transactions
-├── wallets/                  # Wallet files
-├── tests/                    # Unit tests
-├── requirements.txt          # List of dependencies
-└── README. md                 # Documentation
 
+## Cypto Terms
+
+- **Crypto** — digital currency.
+- **Blockchain** — technology for recording transactions.
+- **Bitcoin (BTC)** — the first crypto.
+- **Token** — a digital asset.
+- **Wallet** — software for storing cryptocurrency.
+- **Wallet Address** — unique code for sending and receiving cryptocurrency.
+- **Transaction** — transfer of cryptocurrency.
+- **Conversion** — exchanging one cryptocurrency for another.
+- **Top-up** — adding funds to a wallet.
+
+---
 
