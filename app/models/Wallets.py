@@ -49,9 +49,10 @@ class Wallets:
             print("╔═════════════════════════════════════════════════════════════════════╗")
             print(framed_adress(f"Your {Color.BLUE}wallets{Color.RESET}:"))
             print("╠═════════════════════════════════════════════════════════════════════╣")
-            for wallet in wallets:
+            for i ,wallet in enumerate(wallets):
                 print(framed_adress(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
-                print(framed_adress(""))
+                if i != len(wallets) - 1:
+                    print(framed_adress(""))
             print("╚═════════════════════════════════════════════════════════════════════╝")
         address = input(f"Enter {Color.BLUE}wallet name{Color.RESET} to delete or Press {Color.GRAY}Enter{Color.RESET} to return: ")
         if address == "":
@@ -60,7 +61,6 @@ class Wallets:
 
         if os.path.exists(wallet_path):
             os.remove(wallet_path)
-            print("")
             print(f"{Color.RED}Wallet deleted!{Color.RESET}")
             time.sleep(1.5)
 
@@ -105,7 +105,8 @@ class Wallets:
         print("╠═════════════════════════════════════════════════════════════════════╣")
         for i, wallet in enumerate(wallets):
             print(framed_adress(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
-            print(framed_adress(""))
+            if i != len(wallets) - 1:
+                print(framed_adress(""))
         print("╚═════════════════════════════════════════════════════════════════════╝")
         try:
             idx = input(f"Select {Color.BLUE}wallet{Color.RESET} number or press {Color.GRAY}Enter{Color.RESET} to return: ")
@@ -131,9 +132,10 @@ class Wallets:
             print("╔═════════════════════════════════════════════════════════════════════╗")
             print(framed_adress(f"Available {Color.BLUE}wallets{Color.RESET}:"))
             print("╠═════════════════════════════════════════════════════════════════════╣")
-            for wallet in wallets:
+            for i ,wallet in enumerate(wallets):
                 print(framed_adress(f"{Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
-                print(framed_adress(""))
+                if i != len(wallets) - 1:
+                    print("╠═════════════════════════════════════════════════════════════════════╣")
             print("╚═════════════════════════════════════════════════════════════════════╝")
         input(f"Press {Color.GRAY}Enter{Color.RESET} to continue...")
 
@@ -149,7 +151,8 @@ class Wallets:
         print("╠═════════════════════════════════════════════════════════════════════╣")
         for i, wallet in enumerate(wallets):
             print(framed_adress(f"{i + 1}. {Color.BLUE}{wallet['name']}{Color.RESET} - {Color.GREEN}{wallet['address']}{Color.RESET}"))
-            print(framed_adress(""))
+            if i != len(wallets) - 1:
+                print(framed_adress(""))
         print("╚═════════════════════════════════════════════════════════════════════╝")
         try:
             print("")

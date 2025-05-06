@@ -4,6 +4,7 @@ from app.utils import clear_console
 from app.interfaces import Color
 import time
 from app.interfaces import registr
+import getpass
 
 class User:
     user_file = "user_data.json"
@@ -21,7 +22,7 @@ class User:
     def register():
         print(f"{Color.RED}No user found.{Color.RESET} {Color.GREEN}Please register.{Color.RESET}")
         login = input("Enter your login: ")
-        password = input("Enter your password: ")
+        password = getpass.getpass("Enter your password: ")
         User.save_user_data(login, password)
         print(f"{Color.GREEN}Registration successful!{Color.RESET}")
         time.sleep(2)

@@ -33,3 +33,10 @@ A simple console crypto wallet application built with Python 3. This project all
 
 ---
 
+## How to Launch the Crypto Wallet
+
+1. Download the wallet archive.
+2. Extract it to a convenient location on your computer.
+3. Run the main file to start the wallet.
+
+> You can also learn more about the project and find a detailed guide on our [website](https://23dp1mgned.github.io/exam_website/HTML_pages/header/index.html)!

@@ -51,9 +51,10 @@ class Transactions:
                     print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
                     print(framed_transaction("Transactions History:"))
                     print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
-                    for txn in transactions:
+                    for i, txn in enumerate(transactions):
                         print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
-                        print(framed_transaction(" "))
+                        if i != len(transactions) - 1:
+                            print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
                     print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 choice=input((f"Press 1 to sort transactions or {Color.GRAY}Enter{Color.RESET} to return: "))
                 if choice == "1":
@@ -70,7 +71,7 @@ class Transactions:
         while True:
             clear_console()
             print("╔════════════════════════════════════════╗")
-            print(framed_menu(f"{Color.BLUE}Choose sorting option{Color.RESET}:"))
+            print(framed_menu(f"{Color.BLUE}Choose filter option{Color.RESET}:"))
             print("╠════════════════════════════════════════╣")
             print(framed_menu(f"{Color.YELLOW}[1]{Color.RESET} Date"))
             print(framed_menu(f"{Color.YELLOW}[2]{Color.RESET} Amount"))
@@ -89,10 +90,15 @@ class Transactions:
                     break
 
                 transactions.sort(key=lambda x: datetime.strptime(x["date"], "%Y-%m-%d %H:%M:%S"), reverse=(order == "2"))
-
-                print("Sorted Transactions History:")
-                for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                clear_console()
+                print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
+                print(framed_transaction("Filtered Transactions History:"))
+                print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                for i, txn in enumerate(transactions):
+                    print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
+                    if i != len(transactions) - 1:
+                            print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
@@ -106,36 +112,48 @@ class Transactions:
                     break
 
                 transactions.sort(key=lambda x: float(x["amount"]), reverse=(order == "2"))
-
-                print("Sorted Transactions History:")
-                for txn in transactions:
-                    print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
+                
+                clear_console()
+                print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
+                print(framed_transaction("Filtered Transactions History:"))
+                print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                for i, txn in enumerate(transactions):
+                    print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
+                    if i != len(transactions) - 1:
+                            print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
             elif choice == "3":
                 clear_console()
                 transaction_types = set(txn["type"].lower() for txn in transactions)
-                print("Available transaction types:", ", ".join(transaction_types))
-                transaction_type = input("Enter transaction type to filter by: ").strip().lower()
+                print(f"{Color.GREEN}Available transaction{Color.RESET} types:{Color.YELLOW}", ", ".join(transaction_types))
+                transaction_type = input(f"{Color.RESET}Enter {Color.GREEN}transaction{Color.RESET} type to filter by: ").strip().lower()
                 filtered_transactions = [txn for txn in transactions if txn["type"].lower() == transaction_type]
 
                 if not filtered_transactions:
+                    print(" ")
                     print(f"{Color.RED}No transactions found with this type.{Color.RESET}")
                 else:
-                    print("Filtered Transactions History:")
-                    for txn in filtered_transactions:
-                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
-                
+                    clear_console()
+                    print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
+                    print(framed_transaction(f"Filtered Transactions History:"))
+                    print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                    for i ,txn in enumerate(filtered_transactions):
+                        print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
+                        if i != len(filtered_transactions) - 1:
+                            print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                    print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
 
             elif choice == "4":
                 clear_console()
                 currencies = set((txn["from"], txn["to"]) for txn in transactions)
-                print("Available crypto pairs:", ", ".join([f"{pair[0]} -> {pair[1]}" for pair in currencies]))
-                from_currency = input("Enter 'from' crypto: ").strip().upper()
-                to_currency = input("Enter 'to' crypto: ").strip().upper()
+                print(f"{Color.GREEN}Available{Color.RESET} crypto pairs:", ", ".join([f"{pair[0]} -> {pair[1]}" for pair in currencies]))
+                from_currency = input(f"Enter '{Color.GREEN}from{Color.RESET}' crypto: ").strip().upper()
+                to_currency = input(f"Enter '{Color.YELLOW}to{Color.RESET}' crypto: ").strip().upper()
                 filtered_transactions = [txn for txn in transactions if txn["from"] == from_currency and txn["to"] == to_currency]
 
                 if not filtered_transactions:
@@ -150,9 +168,14 @@ class Transactions:
 
                     filtered_transactions.sort(key=lambda x: (x["from"], x["to"]), reverse=(order == "2"))
 
-                    print("Filtered Transactions History:")
-                    for txn in filtered_transactions:
-                        print(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}")
-                
+                    clear_console()
+                    print("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗")
+                    print(framed_transaction("Filtered Transactions History:"))
+                    print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                    for i ,txn in enumerate(filtered_transactions):
+                        print(framed_transaction(f"Wallet: {Color.GREEN}{txn['wallet_address']}{Color.RESET} | Date: {Color.YELLOW}{txn['date']}{Color.RESET} | Type: {txn['type']} | From: {Color.BLUE}{txn['from']}{Color.RESET} | To: {Color.BLUE}{txn['to']}{Color.RESET} | Amount: {Color.PURPLE}{txn['amount']:.8f}{Color.RESET}"))
+                        if i != len(filtered_transactions) - 1:
+                            print("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣")
+                    print("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝")
                 input(f"Press {Color.GRAY}Enter{Color.RESET} to go back to the menu...")
                 break
