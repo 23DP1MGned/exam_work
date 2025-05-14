@@ -56,6 +56,7 @@ class CryptoWallet:
         total_usd = self.balances.get("USDT", 0.0)
         for crypto, amount in self.balances.items():
             if isinstance(amount, (int, float)) and amount > 0:
+                # isinstance - checking for int or float 
                 if crypto != "USDT":
                     total_usd += float(amount) * CryptoConvert.crypto_rate(crypto)
         print(f" Your total balance: {Color.BLUE}{float(total_usd):.2f} USDT{Color.RESET}")

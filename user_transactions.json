@@ -1,0 +1,67 @@
+{
+    "transactions": [
+        {
+            "type": "Balance replenishment",
+            "amount": 1000.0,
+            "from": "my card",
+            "to": "USDT",
+            "date": "2025-05-14 07:46:37",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "32727be6-b8d6-434a-92d5-e5756514bc30"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 1000.0,
+            "from": "USDT",
+            "to": "BTC",
+            "date": "2025-05-14 07:46:58",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "74c873f2-605a-4c0a-9d9e-f6f5bbf0be86"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 1000.0,
+            "from": "my card",
+            "to": "USDT",
+            "date": "2025-05-14 07:47:18",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "fd4c5083-4e6b-4edf-9acd-9ae3ee2a74d4"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 1000.0,
+            "from": "USDT",
+            "to": "SOL",
+            "date": "2025-05-14 07:47:31",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "18fc5b7f-458b-4e7e-bf65-5b83af62eb13"
+        },
+        {
+            "type": "Balance replenishment",
+            "amount": 1000.0,
+            "from": "my card",
+            "to": "USDT",
+            "date": "2025-05-14 07:48:00",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "eca6a274-ba56-48a9-922b-f050b0189547"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 500.0,
+            "from": "USDT",
+            "to": "TON",
+            "date": "2025-05-14 07:48:13",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "1ec7bce0-7861-4fb3-be53-28e97cdb7c32"
+        },
+        {
+            "type": "Converting to crypto",
+            "amount": 500.0,
+            "from": "USDT",
+            "to": "AVAX",
+            "date": "2025-05-14 07:48:30",
+            "wallet_address": "e6402170-7abc-4866-9be2-f8ab307b9386",
+            "id": "8d9c83b3-2634-4e14-a714-0b24497a38f4"
+        }
+    ]
+}

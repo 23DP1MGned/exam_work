@@ -21,6 +21,8 @@ def app_main():
         print("╠════════════════════════════════════════╣")
         if active_wallet:
             print(framed_menu(f"Selected Wallet: {Color.BLUE}{os.path.splitext(os.path.basename(active_wallet.filename))[0]}{Color.RESET}"))
+        #path.splitext- only name without ".json"
+        #path.basename- is taking only a file name from full directory
         else:
             print(framed_menu(f"No {Color.BLUE}Wallet{Color.RESET} selected! "))
         print("╠════════════════════════════════════════╣")
